@@ -1,0 +1,100 @@
+// Component: Form
+//==========================================>
+
+.form-control {
+    .border-radius(@input-radius);
+    box-shadow: none;
+    border-color: @gray;
+
+    &:focus {
+        border-color: @light-blue;
+        box-shadow: none;
+    }
+
+    &::-moz-placeholder,
+    &:-ms-input-placeholder,
+    &::-webkit-input-placeholder {
+        color: #bbb;
+        opacity: 1;
+    }
+
+    &:not(select) {
+        .appearance();
+    }
+}
+
+.form-group {
+    &.has-success {
+        label {
+            color: @green;
+        }
+
+        .form-control {
+            border-color: @green;
+            box-shadow: none;
+        }
+    }
+
+    &.has-warning {
+        label {
+            color: @yellow;
+        }
+
+        .form-control {
+            border-color: @yellow;
+            box-shadow: none;
+        }
+    }
+
+    &.has-error {
+        label {
+            color: @red;
+        }
+
+        .form-control {
+            border-color: @red;
+            box-shadow: none;
+        }
+    }
+}
+
+// Input group
+.input-group {
+    .input-group-addon {
+        .border-radius(@input-radius);
+        border-color: @gray;
+        background-color: #fff;
+    }
+}
+
+// Button groups
+.btn-group-vertical {
+    .btn {
+        &.btn-flat {
+            &:first-of-type, &:last-of-type {
+                .border-radius(0);
+            }
+        }
+    }
+}
+
+.icheck > label {
+    padding-left: 0;
+}
+
+// Support Font Awesome icons in form-control
+.form-control-feedback.fa {
+    line-height: @input-height-base;
+
+    .input-lg + &,
+    .input-group-lg + &,
+    .form-group-lg .form-control + & {
+        line-height: @input-height-large;
+    }
+
+    .input-sm + &,
+    .input-group-sm + &,
+    .form-group-sm .form-control + & {
+        line-height: @input-height-small;
+    }
+}

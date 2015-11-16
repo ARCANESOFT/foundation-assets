@@ -1,0 +1,72 @@
+// iCheck plugin Line skin : Aero
+//==========================================>
+
+.icheckbox_line-aero,
+.iradio_line-aero {
+    position: relative;
+    display: block;
+    margin: 0;
+    padding: 5px 15px 5px 38px;
+    font-size: 13px;
+    line-height: 17px;
+    color: #fff;
+    background: #9cc2cb;
+    border: none;
+    cursor: pointer;
+    -webkit-border-radius: 3px;
+       -moz-border-radius: 3px;
+            border-radius: 3px;
+
+    .icheck_line-icon {
+        position: absolute;
+        top: 50%;
+        left: 13px;
+        width: 13px;
+        height: 11px;
+        margin: -5px 0 0;
+        padding: 0;
+        overflow: hidden;
+        background: url("@{icheck-img-path}/line/line.png") no-repeat;
+        border: none;
+    }
+}
+
+.icheckbox_line-aero,
+.icheckbox_line-aero.checked,
+.iradio_line-aero {
+    &.hover { background: #B5D1D8; }
+}
+
+.icheckbox_line-aero,
+.iradio_line-aero {
+    &.checked {
+        background: #9cc2cb;
+
+        .icheck_line-icon { background-position: -15px 0; }
+    }
+
+    &.disabled {
+        background: #D2E4E8;
+        cursor: default;
+
+        .icheck_line-icon { background-position: -30px 0; }
+    }
+
+    &.checked.disabled {
+        background: #D2E4E8;
+
+        .icheck_line-icon { background-position: -45px 0; }
+    }
+}
+
+/* HiDPI support */
+@media (-o-min-device-pixel-ratio: 5/4), (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
+    .icheckbox_line-aero,
+    .iradio_line-aero {
+        .icheck_line-icon {
+            background-image: url("@{icheck-img-path}/line/line@2x.png");
+            -webkit-background-size: 60px 13px;
+                    background-size: 60px 13px;
+        }
+    }
+}
