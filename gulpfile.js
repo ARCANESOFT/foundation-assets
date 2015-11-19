@@ -45,7 +45,9 @@ var files = {
         dirs.src   + '/js/vendors/bootstrap-datepicker-fix.js',
         dirs.src   + '/js/vendors/bootstrap3-wysihtml5.all.js',
         dirs.bower + '/slimScroll/jquery.slimscroll.js',
-        dirs.bower + '/fastclick/lib/fastclick.js'
+        dirs.bower + '/fastclick/lib/fastclick.js',
+        dirs.bower + '/ion.rangeslider/js/ion.rangeSlider.js',
+        dirs.bower + '/seiyria-bootstrap-slider/js/bootstrap-slider.js'
     ],
     fonts: [
         dirs.bower + '/bootstrap/fonts/*',
@@ -127,7 +129,8 @@ gulp.task('js-vendors', function() {
 });
 
 gulp.task('img-vendors', function() {
-  //
+    return gulp.src(dirs.bower + '/ion.rangeslider/img/*')
+        .pipe(gulp.dest(dirs.dist + '/img/plugins/RangeSlider'));
 });
 
 gulp.task('fonts-vendors', function() {
