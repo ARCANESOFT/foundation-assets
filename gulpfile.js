@@ -31,6 +31,7 @@ var files = {
         dirs.bower + '/vue/dist/vue.js',
         dirs.bower + '/raphael/raphael.js',
         dirs.bower + '/morris.js/morris.js',
+        dirs.bower + '/Chart.js/Chart.js',
         dirs.bower + '/sweetalert/dist/sweetalert-dev.js',
         dirs.src   + '/js/vendors/jquery.sparkline.js',
         dirs.src   + '/js/vendors/jquery-jvectormap.js',
@@ -39,15 +40,16 @@ var files = {
         dirs.bower + '/moment/moment.js',
         dirs.bower + '/fullcalendar/dist/fullcalendar.js',
         dirs.bower + '/fullcalendar/dist/lang-all.js',
-        dirs.bower + '/bootstrap-daterangepicker/daterangepicker.js',
+        dirs.bower + '/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js',
         dirs.bower + '/bootstrap-daterangepicker/daterangepicker.js',
         dirs.bower + '/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
+        dirs.bower + '/bootstrap-slider/js/bootstrap-slider.js',
+        dirs.bower + '/bootstrap-timepicker/js/bootstrap-timepicker.js',
         dirs.src   + '/js/vendors/bootstrap-datepicker-fix.js',
         dirs.src   + '/js/vendors/bootstrap3-wysihtml5.all.js',
         dirs.bower + '/slimScroll/jquery.slimscroll.js',
         dirs.bower + '/fastclick/lib/fastclick.js',
-        dirs.bower + '/ion.rangeslider/js/ion.rangeSlider.js',
-        dirs.bower + '/seiyria-bootstrap-slider/js/bootstrap-slider.js'
+        dirs.bower + '/ion.rangeslider/js/ion.rangeSlider.js'
     ],
     fonts: [
         dirs.bower + '/bootstrap/fonts/*',
@@ -129,8 +131,11 @@ gulp.task('js-vendors', function() {
 });
 
 gulp.task('img-vendors', function() {
-    return gulp.src(dirs.bower + '/ion.rangeslider/img/*')
+    gulp.src(dirs.bower + '/ion.rangeslider/img/*')
         .pipe(gulp.dest(dirs.dist + '/img/plugins/RangeSlider'));
+
+    gulp.src(dirs.bower + '/bootstrap-colorpicker/dist/img/bootstrap-colorpicker/*')
+        .pipe(gulp.dest(dirs.dist + '/img/plugins/bootstrap-colorpicker'));
 });
 
 gulp.task('fonts-vendors', function() {
