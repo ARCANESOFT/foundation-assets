@@ -43,7 +43,7 @@ $(function () {
     });
 
     //bootstrap WYSIHTML5 - text editor
-    $(".textarea").wysihtml5();
+    $('.textarea').wysihtml5();
 
     $('.daterange').daterangepicker({
         ranges: {
@@ -57,7 +57,7 @@ $(function () {
         startDate: moment().subtract(29, 'days'),
         endDate: moment()
     }, function (start, end) {
-        window.alert("You chose: " + start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+        window.alert('You chose: ' + start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
     });
 
     /* jQueryKnob */
@@ -99,30 +99,15 @@ $(function () {
             }]
         },
         onRegionLabelShow: function (e, el, code) {
-            if (typeof visitorsData[code] != "undefined")
+            if (typeof visitorsData[code] != 'undefined')
                 el.html(el.html() + ': ' + visitorsData[code] + ' new visitors');
         }
     });
 
-    //Sparkline charts
-    var myvalues = [1000, 1200, 920, 927, 931, 1027, 819, 930, 1021];
-    $('#sparkline-1').sparkline(myvalues, {
-        type: 'line',
-        lineColor: '#92c1dc',
-        fillColor: "#ebf4f9",
-        height: '50',
-        width: '80'
-    });
-    myvalues = [515, 519, 520, 522, 652, 810, 370, 627, 319, 630, 921];
-    $('#sparkline-2').sparkline(myvalues, {
-        type: 'line',
-        lineColor: '#92c1dc',
-        fillColor: "#ebf4f9",
-        height: '50',
-        width: '80'
-    });
-    myvalues = [15, 19, 20, 22, 33, 27, 31, 27, 19, 30, 21];
-    $('#sparkline-3').sparkline(myvalues, {
+    // Sparkline charts
+    $('#sparkline-1').sparkline([
+        1000, 1200, 920, 927, 931, 1027, 819, 930, 1021
+    ],{
         type: 'line',
         lineColor: '#92c1dc',
         fillColor: "#ebf4f9",
@@ -130,10 +115,30 @@ $(function () {
         width: '80'
     });
 
-    //The Calender
+    $('#sparkline-2').sparkline([
+        515, 519, 520, 522, 652, 810, 370, 627, 319, 630, 921
+    ],{
+        type: 'line',
+        lineColor: '#92c1dc',
+        fillColor: "#ebf4f9",
+        height: '50',
+        width: '80'
+    });
+
+    $('#sparkline-3').sparkline([
+        15, 19, 20, 22, 33, 27, 31, 27, 19, 30, 21
+    ],{
+        type: 'line',
+        lineColor: '#92c1dc',
+        fillColor: "#ebf4f9",
+        height: '50',
+        width: '80'
+    });
+
+    // The Calender
     $("#calendar").datepicker();
 
-    //SLIMSCROLL FOR CHAT WIDGET
+    // SLIMSCROLL FOR CHAT WIDGET
     $('#chat-box').slimScroll({
         height: '250px'
     });
@@ -161,6 +166,7 @@ $(function () {
         lineColors: ['#a0d0e0', '#3c8dbc'],
         hideHover: 'auto'
     });
+
     var line = new Morris.Line({
         element: 'line-chart',
         resize: true,
@@ -191,20 +197,19 @@ $(function () {
         gridTextSize: 10
     });
 
-    //Donut Chart
+    // Donut Chart
     var donut = new Morris.Donut({
         element: 'sales-chart',
-        resize: true,
-        colors: ["#3c8dbc", "#f56954", "#00a65a"],
         data: [
             {label: "Download Sales", value: 12},
             {label: "In-Store Sales", value: 30},
             {label: "Mail-Order Sales", value: 20}
         ],
-        hideHover: 'auto'
+        colors: ["#3c8dbc", "#f56954", "#00a65a"],
+        resize: true
     });
 
-    //Fix for charts under tabs
+    // Fix for charts under tabs
     $('.box ul.nav a').on('shown.bs.tab', function () {
         area.redraw();
         donut.redraw();
