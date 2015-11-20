@@ -1,13 +1,25 @@
 // Component: Label
 //==========================================>
 
+.label-primary,
+.label-success,
+.label-info,
+.label-warning,
+.label-danger {
+    text-shadow: 0 1px 0 rgba(0, 0, 0, .4);
+}
+
 .label-default {
     background-color: @gray;
     color: #444;
 }
 
-.label-danger {
-    &:extend(.bg-red);
+.label-primary {
+    &:extend(.bg-light-blue);
+}
+
+.label-success {
+    &:extend(.bg-green);
 }
 
 .label-info {
@@ -18,10 +30,6 @@
     &:extend(.bg-yellow);
 }
 
-.label-primary {
-    &:extend(.bg-light-blue);
-}
-
-.label-success {
-    &:extend(.bg-green);
+.label-danger {
+    &:extend(.bg-red);
 }

@@ -77,16 +77,11 @@
         // Add the fontawesome bars icon
         font-family: FontAwesome, sans-serif;
 
-        &:before {
-            content: "\f0c9";
-        }
+        &:before { content: "\f0c9"; }
 
-        &:hover {
-            color: #fff;
-        }
+        &:hover  { color: #fff; }
 
-        &:focus,
-        &:active {
+        &:focus, &:active {
             background: transparent;
         }
     }
@@ -103,15 +98,16 @@
             }
         }
 
-        //Labels in navbar
+        // Labels in navbar
         & > li > a > .label {
             position: absolute;
             top: 9px;
             right: 7px;
+            padding: 2px 3px;
             text-align: center;
             font-size: 9px;
-            padding: 2px 3px;
             line-height: .9;
+            text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
         }
     }
 
@@ -150,7 +146,7 @@
 // Content Header
 .content-header {
     position: relative;
-    padding: 15px 15px 0 15px;
+    padding: 15px 15px 0;
 
     // Header Text
     & > h1 {
@@ -177,18 +173,20 @@
         right: 10px;
         .border-radius(2px);
 
-        & > li > a {
-            color: #444;
-            text-decoration: none;
-            display: inline-block;
+        & > li {
+            & > a {
+                color: #444;
+                text-decoration: none;
+                display: inline-block;
 
-            & > .fa, & > .glyphicon, & > .ion {
-                margin-right: 5px;
+                & > .fa, & > .glyphicon, & > .ion {
+                    margin-right: 5px;
+                }
             }
-        }
 
-        & > li + li:before {
-            content: '>\00a0';
+            & + li:before {
+                content: '>\00a0';
+            }
         }
     }
 
@@ -210,7 +208,7 @@
 }
 
 .navbar-toggle {
-    color: #fff;
+    color: #FFF;
     border: 0;
     margin: 0;
     padding: @navbar-padding-vertical @navbar-padding-horizontal;
@@ -218,20 +216,22 @@
 
 // Control navbar scaffolding on x-small screens
 @media (max-width: @screen-sm-max) {
-    .navbar-custom-menu .navbar-nav > li {
-        float: left;
-    }
+    .navbar-custom-menu {
+        // Don't let links get full width
+        .navbar-nav {
+            margin: 0;
+            float: left;
 
-    // Dont't let links get full width
-    .navbar-custom-menu .navbar-nav {
-        margin: 0;
-        float: left;
-    }
+            & > li {
+                float: left;
 
-    .navbar-custom-menu .navbar-nav > li > a {
-        padding-top: 15px;
-        padding-bottom: 15px;
-        line-height: 20px;
+                & > a {
+                    padding-top: 15px;
+                    padding-bottom: 15px;
+                    line-height: 20px;
+                }
+            }
+        }
     }
 }
 
@@ -240,19 +240,13 @@
     .main-header {
         position: relative;
 
-        .logo,
-        .navbar {
+        .logo, .navbar {
             width: 100%;
             float: none;
         }
 
-        .navbar {
-            margin: 0;
-        }
-
-        .navbar-custom-menu {
-            float: right;
-        }
+        .navbar { margin: 0; }
+        .navbar-custom-menu { float: right; }
     }
 }
 
