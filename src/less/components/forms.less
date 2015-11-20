@@ -7,7 +7,7 @@
     border-color: @gray;
 
     &:focus {
-        border-color: @light-blue;
+        border-color: @brand-primary;
         box-shadow: none;
     }
 
@@ -25,34 +25,28 @@
 
 .form-group {
     &.has-success {
-        label {
-            color: @green;
-        }
+        label { color: @brand-success; }
 
         .form-control {
-            border-color: @green;
+            border-color: @brand-success;
             box-shadow: none;
         }
     }
 
     &.has-warning {
-        label {
-            color: @yellow;
-        }
+        label { color: @brand-warning; }
 
         .form-control {
-            border-color: @yellow;
+            border-color: @brand-warning;
             box-shadow: none;
         }
     }
 
     &.has-error {
-        label {
-            color: @red;
-        }
+        label { color: @brand-danger; }
 
         .form-control {
-            border-color: @red;
+            border-color: @brand-danger;
             box-shadow: none;
         }
     }

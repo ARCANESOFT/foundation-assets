@@ -5,12 +5,12 @@
     // Navbar
     .main-header {
         .navbar {
-            .navbar-variant(@yellow; #fff);
+            .navbar-variant(@brand-warning; #fff);
 
             .sidebar-toggle {
                 color: #fff;
 
-                &:hover { background-color: darken(@yellow, 5%); }
+                &:hover { background-color: darken(@brand-warning, 5%); }
             }
 
             @media (max-width: @screen-header-collapse) {
@@ -21,7 +21,7 @@
                         a {
                             color: #fff;
 
-                            &:hover { background: darken(@yellow, 5%); }
+                            &:hover { background: darken(@brand-warning, 5%); }
                         }
                     }
                 }
@@ -30,11 +30,11 @@
 
         // Logo
         .logo {
-            .logo-variant(darken(@yellow, 5%));
+            .logo-variant(darken(@brand-warning, 5%));
         }
 
         li.user-header {
-            background-color: @yellow;
+            background-color: @brand-warning;
         }
     }
 
@@ -44,5 +44,5 @@
     }
 
     // Create the sidebar skin
-    .skin-dark-sidebar(@yellow);
+    .skin-dark-sidebar(@brand-warning);
 }

@@ -33,31 +33,7 @@
     .modal-header,
     .modal-footer {
         &:extend(.bg-light-blue-active);
-        border-color: darken(@light-blue, 10%);
-    }
-}
-
-.modal-warning {
-    .modal-body {
-        &:extend(.bg-yellow);
-    }
-
-    .modal-header,
-    .modal-footer {
-        &:extend(.bg-yellow-active);
-        border-color: darken(@yellow, 10%);
-    }
-}
-
-.modal-info {
-    .modal-body {
-        &:extend(.bg-aqua);
-    }
-
-    .modal-header,
-    .modal-footer {
-        &:extend(.bg-aqua-active);
-        border-color: darken(@aqua, 10%);
+        border-color: darken(@brand-primary, 10%);
     }
 }
 
@@ -69,7 +45,31 @@
     .modal-header,
     .modal-footer {
         &:extend(.bg-green-active);
-        border-color: darken(@green, 10%);
+        border-color: darken(@brand-success, 10%);
+    }
+}
+
+.modal-info {
+    .modal-body {
+        &:extend(.bg-aqua);
+    }
+
+    .modal-header,
+    .modal-footer {
+        &:extend(.bg-aqua-active);
+        border-color: darken(@brand-info, 10%);
+    }
+}
+
+.modal-warning {
+    .modal-body {
+        &:extend(.bg-yellow);
+    }
+
+    .modal-header,
+    .modal-footer {
+        &:extend(.bg-yellow-active);
+        border-color: darken(@brand-warning, 10%);
     }
 }
 
@@ -81,6 +81,6 @@
     .modal-header,
     .modal-footer {
         &:extend(.bg-red-active);
-        border-color: darken(@red, 10%);
+        border-color: darken(@brand-danger, 10%);
     }
 }

@@ -12,28 +12,28 @@
     box-shadow: @box-boxshadow;
 
     // Box color variations
+    &.box-default {
+        border-top-color: @gray;
+    }
+
     &.box-primary {
-        border-top-color: @light-blue;
-    }
-
-    &.box-info {
-        border-top-color: @aqua;
-    }
-
-    &.box-danger {
-        border-top-color: @red;
-    }
-
-    &.box-warning {
-        border-top-color: @yellow;
+        border-top-color: @brand-primary;
     }
 
     &.box-success {
-        border-top-color: @green;
+        border-top-color: @brand-success;
     }
 
-    &.box-default {
-        border-top-color: @gray;
+    &.box-info {
+        border-top-color: @brand-info;
+    }
+
+    &.box-warning {
+        border-top-color: @brand-warning;
+    }
+
+    &.box-danger {
+        border-top-color: @brand-danger;
     }
 
     // Collapsed mode
@@ -92,23 +92,23 @@
         }
 
         &.box-primary {
-            .box-solid-variant(@light-blue);
-        }
-
-        &.box-info {
-            .box-solid-variant(@aqua);
-        }
-
-        &.box-danger {
-            .box-solid-variant(@red);
-        }
-
-        &.box-warning {
-            .box-solid-variant(@yellow);
+            .box-solid-variant(@brand-primary);
         }
 
         &.box-success {
-            .box-solid-variant(@green);
+            .box-solid-variant(@brand-success);
+        }
+
+        &.box-info {
+            .box-solid-variant(@brand-info);
+        }
+
+        &.box-warning {
+            .box-solid-variant(@brand-warning);
+        }
+
+        &.box-danger {
+            .box-solid-variant(@brand-danger);
         }
 
         & > .box-header > .box-tools .btn {
@@ -382,7 +382,7 @@
         .tools {
             display: none;
             float: right;
-            color: @red;
+            color: @brand-danger;
 
             // icons
             & > .fa, & > .glyphicon, & > .ion {
@@ -409,26 +409,12 @@
         }
     }
 
-    // Color varaity
-    .primary {
-        border-left-color: @light-blue;
-    }
-
-    .danger {
-        border-left-color: @red;
-    }
-
-    .warning {
-        border-left-color: @yellow;
-    }
-
-    .info {
-        border-left-color: @aqua;
-    }
-
-    .success {
-        border-left-color: @green;
-    }
+    // Color varieties
+    .primary { border-left-color: @brand-primary; }
+    .success { border-left-color: @brand-success; }
+    .info    { border-left-color: @brand-info; }
+    .warning { border-left-color: @brand-warning; }
+    .danger  { border-left-color: @brand-danger; }
 
     .handle {
         display: inline-block;
@@ -453,13 +439,8 @@
             .border-radius(50%);
         }
 
-        & > .online {
-            border: 2px solid @green;
-        }
-
-        & > .offline {
-            border: 2px solid @red;
-        }
+        & > .online  { border: 2px solid @brand-success; }
+        & > .offline { border: 2px solid @brand-danger; }
 
         // The message body
         & > .message {
