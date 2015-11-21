@@ -10,17 +10,18 @@ var gulp       = require('gulp'),
     minifyCss  = require('gulp-minify-css'),
     notify     = require('gulp-notify'),
     rename     = require('gulp-rename'),
-    uglify     = require('gulp-uglify');
+    uglify     = require('gulp-uglify'),
+    merge      = require('merge-stream');
 
 /* --------------------------------------------------------------------------
  *  Directories & Files
  * --------------------------------------------------------------------------
  */
-var dirs       = {};
-    dirs.base  = '.';
-    dirs.bower = dirs.base + '/bower';
-    dirs.src   = dirs.base + '/src';
-    dirs.dist  = dirs.base + '/dist';
+var dirs       = {
+    bower: './bower',
+    src:   './src',
+    dist:  './dist'
+};
 
 var files = {
     vendorJs: [
@@ -31,12 +32,14 @@ var files = {
         dirs.bower + '/vue/dist/vue.js',
         dirs.bower + '/raphael/raphael.js',
         dirs.bower + '/morris.js/morris.js',
-        dirs.bower + '/Chart.js/Chart.js',
+        dirs.bower + '/chart-js/Chart.js',
+        dirs.bower + '/icheck/Chart.js',
         dirs.bower + '/sweetalert/dist/sweetalert-dev.js',
         dirs.src   + '/js/vendors/jquery.sparkline.js',
         dirs.src   + '/js/vendors/jquery-jvectormap.js',
         dirs.src   + '/js/vendors/jquery-jvectormap-world-mill-en.js',
         dirs.bower + '/jquery-knob/js/jquery.knob.js',
+        dirs.bower + '/jquery-inputmask/dist/jquery.inputmask.bundle.js',
         dirs.bower + '/moment/moment.js',
         dirs.bower + '/fullcalendar/dist/fullcalendar.js',
         dirs.bower + '/fullcalendar/dist/lang-all.js',
@@ -59,25 +62,20 @@ var files = {
 };
 
 /* --------------------------------------------------------------------------
- *  Main Tasks
- * --------------------------------------------------------------------------
- */
-gulp.task('all', [
-    'default', 'vendors'
-]);
-
-gulp.task('default', [
-    'less', 'js'
-]);
-
-gulp.task('vendors', [
-    'js-vendors', 'img-vendors', 'fonts-vendors'
-]);
-
-/* --------------------------------------------------------------------------
  *  Tasks
  * --------------------------------------------------------------------------
  */
+gulp.task('all', ['default', 'vendors']);
+
+gulp.task('default', ['less', 'js']);
+
+gulp.task('vendors', ['js-vendors', 'img-vendors', 'fonts-vendors']);
+
+gulp.task('watch', function () {
+    gulp.watch(dirs.src + '/less/**/*.less', ['less']);
+    gulp.watch(dirs.src + '/js/**/*.js',     ['js']);
+});
+
 gulp.task('less', function () {
     return gulp.src(dirs.src + '/less/style.less')
         .on('error', notify.onError({
@@ -131,14 +129,16 @@ gulp.task('js-vendors', function() {
 });
 
 gulp.task('img-vendors', function() {
-    gulp.src(dirs.bower + '/ion.rangeslider/img/*')
+    var rangeslider = gulp.src(dirs.bower + '/ion.rangeslider/img/*')
         .pipe(gulp.dest(dirs.dist + '/img/plugins/RangeSlider'));
 
-    gulp.src(dirs.bower + '/bootstrap-colorpicker/dist/img/bootstrap-colorpicker/*')
+    var colorpicker = gulp.src(dirs.bower + '/bootstrap-colorpicker/dist/img/bootstrap-colorpicker/*')
         .pipe(gulp.dest(dirs.dist + '/img/plugins/bootstrap-colorpicker'));
+
+    return merge(rangeslider, colorpicker);
 });
 
 gulp.task('fonts-vendors', function() {
-  return gulp.src(files.fonts)
-      .pipe(gulp.dest(dirs.dist + '/fonts'));
+    return gulp.src(files.fonts)
+        .pipe(gulp.dest(dirs.dist + '/fonts'));
 });
