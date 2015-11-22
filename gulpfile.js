@@ -24,12 +24,20 @@ var dirs       = {
 };
 
 var files = {
+    less: {
+        //
+    },
     vendorJs: [
         dirs.bower + '/jquery/dist/jquery.js',
         dirs.bower + '/jquery-ui/jquery-ui.js',
         dirs.src   + '/js/vendors/jquery-ui-fix.js',
         dirs.bower + '/bootstrap/dist/js/bootstrap.js',
         dirs.bower + '/vue/dist/vue.js',
+        dirs.bower + '/jquery-flot/jquery.flot.js',
+        dirs.bower + '/jquery-flot/jquery.flot.resize.js',
+        dirs.bower + '/jquery-flot/jquery.flot.pie.js',
+        dirs.bower + '/jquery-flot/jquery.flot.stack.js',
+        dirs.bower + '/jquery-flot/jquery.flot.categories.js',
         dirs.bower + '/raphael/raphael.js',
         dirs.bower + '/morris.js/morris.js',
         dirs.bower + '/chart-js/Chart.js',
@@ -54,7 +62,9 @@ var files = {
         dirs.bower + '/select2/dist/js/select2.full.js',
         dirs.bower + '/slimScroll/jquery.slimscroll.js',
         dirs.bower + '/fastclick/lib/fastclick.js',
-        dirs.bower + '/ion.rangeslider/js/ion.rangeSlider.js'
+        dirs.bower + '/ionrangeslider/js/ion.rangeSlider.js',
+        dirs.bower + '/datatables/js/jquery.dataTables.js',
+        dirs.bower + '/datatables-bs/js/dataTables.bootstrap.js'
     ],
     fonts: [
         dirs.bower + '/bootstrap/fonts/*',
@@ -67,10 +77,8 @@ var files = {
  *  Tasks
  * --------------------------------------------------------------------------
  */
-gulp.task('all', ['default', 'vendors']);
-
+gulp.task('all',     ['vendors', 'default']);
 gulp.task('default', ['less', 'js']);
-
 gulp.task('vendors', ['js-vendors', 'img-vendors', 'fonts-vendors']);
 
 gulp.task('watch', function () {
@@ -122,12 +130,19 @@ gulp.task('js', function () {
 });
 
 gulp.task('js-vendors', function() {
-    return gulp.src(files.vendorJs)
+    var pace = gulp.src(dirs.bower + '/pace/pace.js')
+        .pipe(uglify())
+        .pipe(rename({ extname: '.min.js' }))
+        .pipe(gulp.dest(dirs.dist + '/js'));
+
+    var js =  gulp.src(files.vendorJs)
         .pipe(concat('vendors.js'))
         .pipe(gulp.dest(dirs.dist + '/js'))
         .pipe(uglify())
         .pipe(rename({ extname: '.min.js' }))
         .pipe(gulp.dest(dirs.dist + '/js'));
+
+    return merge(pace, js);
 });
 
 gulp.task('img-vendors', function() {
