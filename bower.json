@@ -1,27 +1,22 @@
 {
-    "name": "foundation-assets",
+    "name":        "foundation-assets",
+    "description": "Assets for ARCANESOFT/Foundation package",
+    "keywords":    ["arcanedev", "arcanesoft", "assets", "admin"],
+    "license":     "MIT",
+    "homepage":    "https://github.com/ARCANESOFT/foundation-assets",
     "authors": [
         "ARCANEDEV <arcanedev.maroc@gmail.com>"
     ],
-    "description": "Assets for ARCANESOFT/Foundation package",
-    "keywords": [
-        "arcanedev",
-        "arcanesoft",
-        "assets",
-        "admin"
-    ],
-    "license": "MIT",
-    "homepage": "https://github.com/ARCANESOFT/foundation-assets",
     "ignore": [
         "**/.*",
         "bower",
         "bower_components",
         "node_modules",
+        "demo",
         "test",
         "tests"
     ],
-    "devDependencies": {
-        "admin-lte":                 "~2.3.0",
+    "dependencies": {
         "animate.less":              "*",
         "bootstrap":                 "~3.3.0",
         "bootstrap-colorpicker":     "mjolnic-bootstrap-colorpicker#~2.3.0",
@@ -51,5 +46,8 @@
         "slimScroll":                "~1.3.0",
         "sweetalert":                "~1.1.0",
         "vue":                       "~1.0.0"
+    },
+    "devDependencies": {
+        "admin-lte":                 "~2.3.0"
     }
 }
