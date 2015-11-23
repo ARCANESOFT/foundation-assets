@@ -7,6 +7,12 @@
     "authors": [
         "ARCANEDEV <arcanedev.maroc@gmail.com>"
     ],
+    "main": [
+        "dist/css/foundation.css",
+        "dist/css/foundation.min.css",
+        "dist/js/foundation.js",
+        "dist/js/foundation.min.js"
+    ],
     "ignore": [
         "**/.*",
         "bower",
@@ -16,7 +22,8 @@
         "test",
         "tests"
     ],
-    "dependencies": {
+    "devDependencies": {
+        "admin-lte":                 "~2.3.0",
         "animate.less":              "*",
         "bootstrap":                 "~3.3.0",
         "bootstrap-colorpicker":     "mjolnic-bootstrap-colorpicker#~2.3.0",
@@ -46,8 +53,5 @@
         "slimScroll":                "~1.3.0",
         "sweetalert":                "~1.1.0",
         "vue":                       "~1.0.0"
-    },
-    "devDependencies": {
-        "admin-lte":                 "~2.3.0"
     }
 }
