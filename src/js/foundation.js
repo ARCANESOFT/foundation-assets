@@ -1,8 +1,8 @@
-/*! AdminLTE app.js
+/*! Foundation app.js
  * ================
- * Main JS application file for AdminLTE v2. This file
+ * Main JS application file for Foundation v2. This file
  * should be included in all pages. It controls some layout
- * options and implements exclusive AdminLTE plugins.
+ * options and implements exclusive Foundation plugins.
  *
  * @Author  Almsaeed Studio
  * @Support <http://www.almsaeedstudio.com>
@@ -12,71 +12,65 @@
  */
 
 // Make sure jQuery has been loaded before app.js
-if (typeof jQuery === "undefined") {
-    throw new Error("AdminLTE requires jQuery");
+if (typeof jQuery === 'undefined') {
+    throw new Error('Foundation requires jQuery');
 }
 
-/* AdminLTE
+/* Foundation
  *
  * @type Object
- * @description $.AdminLTE is the main object for the template's app.
+ * @description $.Foundation is the main object for the template's app.
  *              It's used for implementing functions and options related
  *              to the template. Keeping everything wrapped in an object
  *              prevents conflict with other plugins and is a better
  *              way to organize our code.
  */
-$.AdminLTE = {};
+$.Foundation = {};
 
 /* --------------------
- * - AdminLTE Options -
+ * - Foundation Options -
  * --------------------
  * Modify these options to suit your implementation
  */
-$.AdminLTE.options = {
-    //Add slimscroll to navbar menus
-    //This requires you to load the slimscroll plugin
-    //in every page before app.js
+$.Foundation.options = {
+    // Add slimscroll to navbar menus
+    // This requires you to load the slimscroll plugin in every page before app.js
     navbarMenuSlimscroll: true,
-    navbarMenuSlimscrollWidth: "3px", //The width of the scroll bar
-    navbarMenuHeight: "200px", //The height of the inner menu
-    //General animation speed for JS animated elements such as box collapse/expand and
-    //sidebar treeview slide up/down. This options accepts an integer as milliseconds,
-    //'fast', 'normal', or 'slow'
+    navbarMenuSlimscrollWidth: '3px', // The width of the scroll bar
+    navbarMenuHeight: '200px', // The height of the inner menu
+    // General animation speed for JS animated elements such as box collapse/expand and sidebar treeview slide up/down.
+    // This options accepts an integer as milliseconds, 'fast', 'normal', or 'slow'
     animationSpeed: 500,
-    //Sidebar push menu toggle button selector
-    sidebarToggleSelector: "[data-toggle='offcanvas']",
-    //Activate sidebar push menu
+    // Sidebar push menu toggle button selector
+    sidebarToggleSelector: '[data-toggle="offcanvas"]',
+    // Activate sidebar push menu
     sidebarPushMenu: true,
-    //Activate sidebar slimscroll if the fixed layout is set (requires SlimScroll Plugin)
+    // Activate sidebar slimscroll if the fixed layout is set (requires SlimScroll Plugin)
     sidebarSlimScroll: true,
-    //Enable sidebar expand on hover effect for sidebar mini
-    //This option is forced to true if both the fixed layout and sidebar mini
-    //are used together
+    // Enable sidebar expand on hover effect for sidebar mini
+    // This option is forced to true if both the fixed layout and sidebar mini are used together
     sidebarExpandOnHover: false,
-    //BoxRefresh Plugin
+    // BoxRefresh Plugin
     enableBoxRefresh: true,
-    //Bootstrap.js tooltip
+    // Bootstrap.js tooltip
     enableBSToppltip: true,
-    BSTooltipSelector: "[data-toggle='tooltip']",
-    //Enable Fast Click. Fastclick.js creates a more
-    //native touch experience with touch devices. If you
-    //choose to enable the plugin, make sure you load the script
-    //before AdminLTE's app.js
+    BSTooltipSelector: '[data-toggle="tooltip"]',
+    // Enable Fast Click. Fastclick.js creates a more native touch experience with touch devices.
+    // If you choose to enable the plugin, make sure you load the script before Foundation's app.js
     enableFastclick: true,
-    //Control Sidebar Options
+    // Control Sidebar Options
     enableControlSidebar: true,
     controlSidebarOptions: {
-        //Which button should trigger the open/close event
-        toggleBtnSelector: "[data-toggle='control-sidebar']",
-        //The sidebar selector
-        selector: ".control-sidebar",
-        //Enable slide over content
+        // Which button should trigger the open/close event
+        toggleBtnSelector: '[data-toggle="control-sidebar"]',
+        // The sidebar selector
+        selector: '.control-sidebar',
+        // Enable slide over content
         slide: true
     },
-    //Box Widget Plugin. Enable this plugin
-    //to allow boxes to be collapsed and/or removed
+    // Box Widget Plugin. Enable this plugin to allow boxes to be collapsed and/or removed
     enableBoxWidget: true,
-    //Box Widget plugin options
+    // Box Widget plugin options
     boxWidgetOptions: {
         boxWidgetIcons: {
             //Collapse icon
@@ -93,35 +87,35 @@ $.AdminLTE.options = {
             collapse: '[data-widget="collapse"]'
         }
     },
-    //Direct Chat plugin options
+    // Direct Chat plugin options
     directChat: {
-        //Enable direct chat by default
+        // Enable direct chat by default
         enable: true,
-        //The button to open and close the chat contacts pane
+        // The button to open and close the chat contacts pane
         contactToggleSelector: '[data-widget="chat-pane-toggle"]'
     },
-    //Define the set of colors to use globally around the website
+    // Define the set of colors to use globally around the website
     colors: {
-        lightBlue: "#3c8dbc",
-        red: "#f56954",
-        green: "#00a65a",
-        aqua: "#00c0ef",
-        yellow: "#f39c12",
-        blue: "#0073b7",
-        navy: "#001F3F",
-        teal: "#39CCCC",
-        olive: "#3D9970",
-        lime: "#01FF70",
-        orange: "#FF851B",
-        fuchsia: "#F012BE",
-        purple: "#8E24AA",
-        maroon: "#D81B60",
-        black: "#222222",
-        gray: "#d2d6de"
+        lightBlue: '#3C8DBC',
+        red:       '#F56954',
+        green:     '#00A65A',
+        aqua:      '#00C0EF',
+        yellow:    '#F39C12',
+        blue:      '#0073B7',
+        navy:      '#001F3F',
+        teal:      '#39CCCC',
+        olive:     '#3D9970',
+        lime:      '#01FF70',
+        orange:    '#FF851B',
+        fuchsia:   '#F012BE',
+        purple:    '#8E24AA',
+        maroon:    '#D81B60',
+        black:     '#222222',
+        gray:      '#D2D6DE'
     },
-    //The standard screen sizes that bootstrap uses.
-    //If you change these in the variables.less file, change
-    //them here too.
+
+    // The standard screen sizes that bootstrap uses.
+    // If you change these in the variables.less file, change them here too.
     screenSizes: {
         xs: 480,
         sm: 768,
@@ -133,34 +127,34 @@ $.AdminLTE.options = {
 /* ------------------
  * - Implementation -
  * ------------------
- * The next block of code implements AdminLTE's functions and plugins as specified by the options above.
+ * The next block of code implements Foundation's functions and plugins as specified by the options above.
  */
 $(function () {
-    "use strict";
+    'use strict';
 
     // Fix for IE page transitions
-    $('body').removeClass("hold-transition");
+    $('body').removeClass('hold-transition');
 
     // Extend options if external options exist
-    if (typeof AdminLTEOptions !== 'undefined') {
-        $.extend(true, $.AdminLTE.options, AdminLTEOptions);
+    if (typeof FoundationOptions !== 'undefined') {
+        $.extend(true, $.Foundation.options, FoundationOptions);
     }
 
     // Easy access to options
-    var options = $.AdminLTE.options;
+    var options = $.Foundation.options;
 
     // Set up the object
     _init();
 
     // Activate the layout maker
-    $.AdminLTE.layout.activate();
+    $.Foundation.layout.activate();
 
     // Enable sidebar tree view controls
-    $.AdminLTE.tree('.sidebar');
+    $.Foundation.tree('.sidebar');
 
-    //Enable control sidebar
+    // Enable control sidebar
     if (options.enableControlSidebar) {
-        $.AdminLTE.controlSidebar.activate();
+        $.Foundation.controlSidebar.activate();
     }
 
     // Add slimscroll to navbar dropdown
@@ -174,7 +168,7 @@ $(function () {
 
     // Activate sidebar push menu
     if (options.sidebarPushMenu) {
-        $.AdminLTE.pushMenu.activate(options.sidebarToggleSelector);
+        $.Foundation.pushMenu.activate(options.sidebarToggleSelector);
     }
 
     // Activate Bootstrap tooltip
@@ -186,7 +180,7 @@ $(function () {
 
     // Activate box widget
     if (options.enableBoxWidget) {
-        $.AdminLTE.boxWidget.activate();
+        $.Foundation.boxWidget.activate();
     }
 
     // Activate fast click
@@ -218,9 +212,9 @@ $(function () {
 });
 
 /* ----------------------------------
- * - Initialize the AdminLTE Object -
+ * - Initialize the Foundation Object -
  * ----------------------------------
- * All AdminLTE functions are implemented below.
+ * All Foundation functions are implemented below.
  */
 function _init() {
     'use strict';
@@ -229,11 +223,11 @@ function _init() {
      * Fixes the layout height in case min-height fails.
      *
      * @type Object
-     * @usage $.AdminLTE.layout.activate()
-     *        $.AdminLTE.layout.fix()
-     *        $.AdminLTE.layout.fixSidebar()
+     * @usage $.Foundation.layout.activate()
+     *        $.Foundation.layout.fix()
+     *        $.Foundation.layout.fixSidebar()
      */
-    $.AdminLTE.layout = {
+    $.Foundation.layout = {
         activate: function () {
             var _this = this;
 
@@ -258,7 +252,7 @@ function _init() {
                 postSetWidth = window_height >= sidebar_height ? (window_height - neg) : sidebar_height;
 
                 // Fix for the control sidebar height
-                var controlSidebar = $($.AdminLTE.options.controlSidebarOptions.selector);
+                var controlSidebar = $($.Foundation.options.controlSidebarOptions.selector);
 
                 if (
                     typeof controlSidebar !== 'undefined' &&
@@ -284,8 +278,8 @@ function _init() {
                 window.console.error('Error: the fixed layout requires the slimscroll plugin!');
             }
 
-            //Enable slimscroll for fixed layout
-            if ($.AdminLTE.options.sidebarSlimScroll) {
+            // Enable slimscroll for fixed layout
+            if ($.Foundation.options.sidebarSlimScroll) {
                 if (typeof $.fn.slimScroll != 'undefined') {
                     // Destroy if it exists
                     sidebar.slimScroll({destroy: true}).height('auto');
@@ -306,13 +300,13 @@ function _init() {
      * Adds the push menu functionality to the sidebar.
      *
      * @type Function
-     * @usage: $.AdminLTE.pushMenu("[data-toggle='offcanvas']")
+     * @usage: $.Foundation.pushMenu("[data-toggle='offcanvas']")
      */
-    $.AdminLTE.pushMenu = {
+    $.Foundation.pushMenu = {
         activate: function (toggleBtn) {
             // Get the screen sizes
             var body        = $('body'),
-                screenSizes = $.AdminLTE.options.screenSizes;
+                screenSizes = $.Foundation.options.screenSizes;
 
             //Enable sidebar toggle
             $(document).on('click', toggleBtn, function (e) {
@@ -348,7 +342,7 @@ function _init() {
 
             // Enable expand on hover for sidebar mini
             if (
-                $.AdminLTE.options.sidebarExpandOnHover ||
+                $.Foundation.options.sidebarExpandOnHover ||
                 (body.hasClass('fixed') && body.hasClass('sidebar-mini'))
             ) {
                 this.expandOnHover();
@@ -357,7 +351,7 @@ function _init() {
         expandOnHover: function () {
             var _this       = this,
                 body        = $('body'),
-                screenWidth = $.AdminLTE.options.screenSizes.sm - 1;
+                screenWidth = $.Foundation.options.screenSizes.sm - 1;
 
             // Expand sidebar on hover
             $('.main-sidebar').hover(function () {
@@ -396,11 +390,11 @@ function _init() {
      * tree view menu.
      *
      * @type Function
-     * @Usage: $.AdminLTE.tree('.sidebar')
+     * @Usage: $.Foundation.tree('.sidebar')
      */
-    $.AdminLTE.tree = function (menu) {
+    $.Foundation.tree = function (menu) {
         var _this          = this;
-        var animationSpeed = $.AdminLTE.options.animationSpeed;
+        var animationSpeed = $.Foundation.options.animationSpeed;
 
         $(menu).on('click', 'li a', function (e) {
             // Get the clicked link and the next element
@@ -461,14 +455,14 @@ function _init() {
      * Adds functionality to the right sidebar
      *
      * @type Object
-     * @usage $.AdminLTE.controlSidebar.activate(options)
+     * @usage $.Foundation.controlSidebar.activate(options)
      */
-    $.AdminLTE.controlSidebar = {
+    $.Foundation.controlSidebar = {
         // instantiate the object
         activate: function () {
 
             var _this   = this,                                     // Get the object
-                options = $.AdminLTE.options.controlSidebarOptions, // Update options
+                options = $.Foundation.options.controlSidebarOptions, // Update options
                 sidebar = $(options.selector),                      // Get the sidebar
                 btn     = $(options.toggleBtnSelector);             // The toggle button
 
@@ -555,13 +549,13 @@ function _init() {
      * removing boxes from the screen.
      *
      * @type Object
-     * @usage $.AdminLTE.boxWidget.activate()
-     *        Set all your options in the main $.AdminLTE.options object
+     * @usage $.Foundation.boxWidget.activate()
+     *        Set all your options in the main $.Foundation.options object
      */
-    $.AdminLTE.boxWidget = {
-        selectors:      $.AdminLTE.options.boxWidgetOptions.boxWidgetSelectors,
-        icons:          $.AdminLTE.options.boxWidgetOptions.boxWidgetIcons,
-        animationSpeed: $.AdminLTE.options.animationSpeed,
+    $.Foundation.boxWidget = {
+        selectors:      $.Foundation.options.boxWidgetOptions.boxWidgetSelectors,
+        icons:          $.Foundation.options.boxWidgetOptions.boxWidgetIcons,
+        animationSpeed: $.Foundation.options.animationSpeed,
         activate: function (_box) {
             var _this = this;
 
@@ -583,9 +577,9 @@ function _init() {
         },
         collapse: function (element) {
             var _this = this,
-                // Find the box parent
+            // Find the box parent
                 box         = element.parents('.box').first(),
-                // Find the body and the footer
+            // Find the body and the footer
                 box_content = box.find('> .box-body, > .box-footer, > form  >.box-body, > form > .box-footer');
 
             if ( ! box.hasClass('collapsed-box')) {
@@ -632,8 +626,8 @@ function _init() {
  * @type plugin
  * @usage $("#box-widget").boxRefresh( options );
  */
-(function ($) {
-    "use strict";
+$(function () {
+    'use strict';
 
     $.fn.boxRefresh = function (options) {
 
@@ -697,8 +691,7 @@ function _init() {
         }
 
     };
-
-})(jQuery);
+});
 
 /*
  * EXPLICIT BOX CONTROLS
@@ -711,24 +704,23 @@ function _init() {
  * @usage $("#box-widget").toggleBox();
  * @usage $("#box-widget").removeBox();
  */
-(function ($) {
+$(function () {
     'use strict';
 
     $.fn.activateBox = function () {
-        $.AdminLTE.boxWidget.activate(this);
+        $.Foundation.boxWidget.activate(this);
     };
 
     $.fn.toggleBox = function(){
-        var button = $($.AdminLTE.boxWidget.selectors.collapse, this);
-        $.AdminLTE.boxWidget.collapse(button);
+        var button = $($.Foundation.boxWidget.selectors.collapse, this);
+        $.Foundation.boxWidget.collapse(button);
     };
 
     $.fn.removeBox = function(){
-        var button = $($.AdminLTE.boxWidget.selectors.remove, this);
-        $.AdminLTE.boxWidget.remove(button);
+        var button = $($.Foundation.boxWidget.selectors.remove, this);
+        $.Foundation.boxWidget.remove(button);
     };
-
-})(jQuery);
+});
 
 /*
  * TODO LIST CUSTOM PLUGIN
@@ -738,7 +730,7 @@ function _init() {
  * @type plugin
  * @usage $("#todo-widget").todolist( options );
  */
-(function ($) {
+$(function () {
     'use strict';
 
     $.fn.todolist = function (options) {
@@ -781,4 +773,18 @@ function _init() {
             }
         });
     };
-}(jQuery));
+});
+
+$(function () {
+    var userMenu     = $('.dropdown.user.user-menu'),
+        userDropMenu = userMenu.find('.dropdown-menu');
+
+    userDropMenu.addClass('animated');
+    userMenu.on('show.bs.dropdown', function () {
+        userDropMenu.addClass('flipInY');
+    });
+
+    userMenu.on('hide.bs.dropdown', function () {
+        userDropMenu.removeClass('flipInY');
+    })
+});
