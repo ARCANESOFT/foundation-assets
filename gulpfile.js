@@ -87,7 +87,7 @@ gulp.task('watch', function () {
 });
 
 gulp.task('less', function () {
-    return gulp.src(dirs.src + '/less/style.less')
+    return gulp.src(dirs.src + '/less/foundation.less')
         .on('error', notify.onError({
             title:   'Error compiling LESS.',
             message: 'Error: <%= error.message %>',
@@ -110,7 +110,7 @@ gulp.task('less', function () {
 });
 
 gulp.task('js', function () {
-    return gulp.src(dirs.src + '/js/main.js')
+    return gulp.src(dirs.src + '/js/foundation.js')
         .on('error', notify.onError({
             title:   'Error compiling Javascript.',
             message: 'Error: <%= error.message %>',
@@ -133,7 +133,7 @@ gulp.task('js-vendors', function() {
     var pace = gulp.src(dirs.bower + '/pace/pace.js')
         .pipe(uglify())
         .pipe(rename({ extname: '.min.js' }))
-        .pipe(gulp.dest(dirs.dist + '/js'));
+        .pipe(gulp.dest(dirs.dist + '/js/vendors'));
 
     var js =  gulp.src(files.vendorJs)
         .pipe(concat('vendors.js'))
