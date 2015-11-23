@@ -21971,6 +21971,47 @@ a:focus {
   display: block;
   margin-top: 5px;
 }
+/* Animations with animate.less */
+.animated {
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  -o-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-delay: 0s;
+  -moz-animation-delay: 0s;
+  -o-animation-delay: 0s;
+  animation-delay: 0s;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.animated.infinite {
+  -moz-animation-iteration-count: infinite;
+  -o-animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+.animated.hinge {
+  -moz-animation-duration: 2s;
+  -o-animation-duration: 2s;
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+}
+.animated.bounceIn,
+.animated.bounceOut {
+  -moz-animation-duration: 0.75s;
+  -o-animation-duration: 0.75s;
+  -webkit-animation-duration: 0.75s;
+  animation-duration: 0.75s;
+}
+.animated.flipOutX,
+.animated.flipOutY {
+  -moz-animation-duration: 0.75s;
+  -o-animation-duration: 0.75s;
+  -webkit-animation-duration: 0.75s;
+  animation-duration: 0.75s;
+}
 .main-header {
   position: relative;
   max-height: 100px;
