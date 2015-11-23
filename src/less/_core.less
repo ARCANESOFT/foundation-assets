@@ -163,3 +163,26 @@ a {
         margin-top: 5px;
     }
 }
+
+/* Animations with animate.less */
+.animated {
+    .animated();
+
+    &.infinite {
+        .animation-iteration-count(infinite);
+    }
+
+    &.hinge {
+        .animation-duration(2s);
+    }
+
+    &.bounceIn,
+    &.bounceOut {
+        .animation-duration(.75s);
+    }
+
+    &.flipOutX,
+    &.flipOutY {
+        .animation-duration(.75s);
+    }
+}
