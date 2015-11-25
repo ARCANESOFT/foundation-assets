@@ -203,10 +203,10 @@ $(function () {
     $('.btn-group[data-toggle="btn-toggle"]').each(function () {
         var group = $(this);
 
-        $(this).find('.btn').on('click', function (e) {
+        group.find('.btn').on('click', function (e) {
+            e.preventDefault();
             group.find('.btn.active').removeClass('active');
             $(this).addClass('active');
-            e.preventDefault();
         });
     });
 });
@@ -227,73 +227,7 @@ function _init() {
      *        $.Foundation.layout.fix()
      *        $.Foundation.layout.fixSidebar()
      */
-    $.Foundation.layout = {
-        activate: function () {
-            var _this = this;
-
-            _this.fix();
-            _this.fixSidebar();
-            $(window, '.wrapper').resize(function () {
-                _this.fix();
-                _this.fixSidebar();
-            });
-        },
-        fix: function () {
-            // Get window height and the wrapper height
-            var neg            = $('.main-header').outerHeight() + $('.main-footer').outerHeight(),
-                window_height  = $(window).height(),
-                sidebar_height = $('.sidebar').height(),
-                postSetWidth;
-
-            // Set the min-height of the content and sidebar based on the the height of the document.
-            if ($('body').hasClass('fixed')) {
-                postSetWidth = window_height - $('.main-footer').outerHeight();
-            } else {
-                postSetWidth = window_height >= sidebar_height ? (window_height - neg) : sidebar_height;
-
-                // Fix for the control sidebar height
-                var controlSidebar = $($.Foundation.options.controlSidebarOptions.selector);
-
-                if (
-                    typeof controlSidebar !== 'undefined' &&
-                    controlSidebar.height() > postSetWidth
-                ) {
-                    postSetWidth = controlSidebar.height();
-                }
-            }
-
-            $('.content-wrapper, .right-side').css('min-height', postSetWidth);
-        },
-        fixSidebar: function () {
-            var sidebar = $('.sidebar');
-
-            // Make sure the body tag has the .fixed class
-            if ( ! $('body').hasClass('fixed')) {
-                if (typeof $.fn.slimScroll != 'undefined') {
-                    sidebar.slimScroll({destroy: true}).height('auto');
-                }
-
-                return;
-            } else if (typeof $.fn.slimScroll == 'undefined' && window.console) {
-                window.console.error('Error: the fixed layout requires the slimscroll plugin!');
-            }
-
-            // Enable slimscroll for fixed layout
-            if ($.Foundation.options.sidebarSlimScroll) {
-                if (typeof $.fn.slimScroll != 'undefined') {
-                    // Destroy if it exists
-                    sidebar.slimScroll({destroy: true}).height('auto');
-
-                    // Add slimscroll
-                    sidebar.slimscroll({
-                        height: ($(window).height() - $('.main-header').height()) + 'px',
-                        color:  'rgba(0,0,0,0.2)',
-                        size:   '3px'
-                    });
-                }
-            }
-        }
-    };
+    $.Foundation.layout = require('./widgets/layout');
 
     /* PushMenu()
      * ==========
@@ -302,153 +236,16 @@ function _init() {
      * @type Function
      * @usage: $.Foundation.pushMenu("[data-toggle='offcanvas']")
      */
-    $.Foundation.pushMenu = {
-        activate: function (toggleBtn) {
-            // Get the screen sizes
-            var body        = $('body'),
-                screenSizes = $.Foundation.options.screenSizes;
-
-            //Enable sidebar toggle
-            $(document).on('click', toggleBtn, function (e) {
-                e.preventDefault();
-
-                // Enable sidebar push menu
-                if ($(window).width() > (screenSizes.sm - 1)) {
-                    if (body.hasClass('sidebar-collapse')) {
-                        body.removeClass('sidebar-collapse').trigger('expanded.pushMenu');
-                    } else {
-                        body.addClass('sidebar-collapse').trigger('collapsed.pushMenu');
-                    }
-                }
-                // Handle sidebar push menu for small screens
-                else {
-                    if (body.hasClass('sidebar-open')) {
-                        body.removeClass('sidebar-open').removeClass('sidebar-collapse').trigger('collapsed.pushMenu');
-                    } else {
-                        body.addClass('sidebar-open').trigger('expanded.pushMenu');
-                    }
-                }
-            });
-
-            $('.content-wrapper').click(function () {
-                // Enable hide menu when clicking on the content-wrapper on small screens
-                if (
-                    $(window).width() <= (screenSizes.sm - 1) &&
-                    body.hasClass('sidebar-open')
-                ) {
-                    body.removeClass('sidebar-open');
-                }
-            });
-
-            // Enable expand on hover for sidebar mini
-            if (
-                $.Foundation.options.sidebarExpandOnHover ||
-                (body.hasClass('fixed') && body.hasClass('sidebar-mini'))
-            ) {
-                this.expandOnHover();
-            }
-        },
-        expandOnHover: function () {
-            var _this       = this,
-                body        = $('body'),
-                screenWidth = $.Foundation.options.screenSizes.sm - 1;
-
-            // Expand sidebar on hover
-            $('.main-sidebar').hover(function () {
-                if (
-                    body.hasClass('sidebar-mini') &&
-                    body.hasClass('sidebar-collapse') &&
-                    $(window).width() > screenWidth
-                ) {
-                    _this.expand();
-                }
-            }, function () {
-                if (
-                    body.hasClass('sidebar-mini') &&
-                    body.hasClass('sidebar-expanded-on-hover') &&
-                    $(window).width() > screenWidth
-                ) {
-                    _this.collapse();
-                }
-            });
-        },
-        expand: function () {
-            $('body').removeClass('sidebar-collapse').addClass('sidebar-expanded-on-hover');
-        },
-        collapse: function () {
-            var body = $('body');
-
-            if (body.hasClass('sidebar-expanded-on-hover')) {
-                body.removeClass('sidebar-expanded-on-hover').addClass('sidebar-collapse');
-            }
-        }
-    };
+    $.Foundation.pushMenu = require('./widgets/push-menu');
 
     /* Tree()
      * ======
-     * Converts the sidebar into a multilevel
-     * tree view menu.
+     * Converts the sidebar into a multilevel tree view menu.
      *
      * @type Function
      * @Usage: $.Foundation.tree('.sidebar')
      */
-    $.Foundation.tree = function (menu) {
-        var _this          = this;
-        var animationSpeed = $.Foundation.options.animationSpeed;
-
-        $(menu).on('click', 'li a', function (e) {
-            // Get the clicked link and the next element
-            var $this        = $(this);
-            var checkElement = $this.next();
-
-            // Check if the next element is a menu and is visible
-            if (
-                (checkElement.is('.treeview-menu')) &&
-                (checkElement.is(':visible')) &&
-                ( ! $('body').hasClass('sidebar-collapse'))
-            ) {
-                // Close the menu
-                checkElement.slideUp(animationSpeed, function () {
-                    checkElement.removeClass('menu-open');
-                    // Fix the layout in case the sidebar stretches over the height of the window
-                    // _this.layout.fix();
-                });
-                checkElement.parent("li").removeClass("active");
-            }
-            // If the menu is not visible
-            else if (
-                (checkElement.is('.treeview-menu')) &&
-                ( ! checkElement.is(':visible'))
-            ) {
-                // Get the parent menu
-                var parent = $this.parents('ul').first();
-                // Close all open menus within the parent
-                var ul = parent.find('ul:visible').slideUp(animationSpeed);
-                // Remove the menu-open class from the parent
-
-                ul.removeClass('menu-open');
-
-                // Get the parent li
-                var parent_li = $this.parent('li');
-
-                // Open the target menu and add the menu-open class
-                checkElement.slideDown(animationSpeed, function () {
-                    // Add the class active to the parent li
-                    checkElement.addClass('menu-open');
-                    parent.find('li.active').removeClass('active');
-                    parent_li.addClass('active');
-
-                    // Fix the layout in case the sidebar stretches over the height of the window
-                    _this.layout.fix();
-                });
-            }
-
-            // if this isn't a link, prevent the page from being redirected
-            if (checkElement.is('.treeview-menu')) {
-                e.preventDefault();
-            }
-        });
-    };
+    $.Foundation.tree = require('./widgets/sidebar');
 
     /* ControlSidebar
      * ==============
@@ -457,158 +254,17 @@ function _init() {
      * @type Object
      * @usage $.Foundation.controlSidebar.activate(options)
      */
-    $.Foundation.controlSidebar = {
-        // instantiate the object
-        activate: function () {
-
-            var _this   = this,                                     // Get the object
-                options = $.Foundation.options.controlSidebarOptions, // Update options
-                sidebar = $(options.selector),                      // Get the sidebar
-                btn     = $(options.toggleBtnSelector);             // The toggle button
-
-            // Listen to the click event
-            btn.on('click', function (e) {
-                e.preventDefault();
-                // If the sidebar is not open
-                if (
-                    ! sidebar.hasClass('control-sidebar-open') &&
-                    ! $('body').hasClass('control-sidebar-open')
-                ) {
-                    // Open the sidebar
-                    _this.open(sidebar, options.slide);
-                } else {
-                    _this.close(sidebar, options.slide);
-                }
-            });
-
-            // If the body has a boxed layout, fix the sidebar bg position
-            var bg = $('.control-sidebar-bg');
-
-            _this._fix(bg);
-
-            // If the body has a fixed layout, make the control sidebar fixed
-            if ($('body').hasClass('fixed')) {
-                _this._fixForFixed(sidebar);
-            } else {
-                // If the content height is less than the sidebar's height, force max height
-                if ($('.content-wrapper, .right-side').height() < sidebar.height()) {
-                    _this._fixForContent(sidebar);
-                }
-            }
-        },
-        // Open the control sidebar
-        open: function (sidebar, slide) {
-            // Slide over content
-            if (slide) {
-                sidebar.addClass('control-sidebar-open');
-            } else {
-                // Push the content by adding the open class to the body instead of the sidebar itself
-                $('body').addClass('control-sidebar-open');
-            }
-        },
-        // Close the control sidebar
-        close: function (sidebar, slide) {
-            if (slide) {
-                sidebar.removeClass('control-sidebar-open');
-            } else {
-                $('body').removeClass('control-sidebar-open');
-            }
-        },
-        _fix: function (sidebar) {
-            var _this = this;
-
-            if ($('body').hasClass('layout-boxed')) {
-                sidebar.css('position', 'absolute');
-                sidebar.height($(".wrapper").height());
-                $(window).resize(function () {
-                    _this._fix(sidebar);
-                });
-            } else {
-                sidebar.css({
-                    'position': 'fixed',
-                    'height': 'auto'
-                });
-            }
-        },
-        _fixForFixed: function (sidebar) {
-            sidebar.css({
-                'position':       'fixed',
-                'max-height':     '100%',
-                'overflow':       'auto',
-                'padding-bottom': '50px'
-            });
-        },
-        _fixForContent: function (sidebar) {
-            $('.content-wrapper, .right-side').css('min-height', sidebar.height());
-        }
-    };
+    $.Foundation.controlSidebar = require('./widgets/control-sidebar');
 
     /* BoxWidget
      * =========
-     * BoxWidget is a plugin to handle collapsing and
-     * removing boxes from the screen.
+     * BoxWidget is a plugin to handle collapsing and removing boxes from the screen.
      *
      * @type Object
      * @usage $.Foundation.boxWidget.activate()
      *        Set all your options in the main $.Foundation.options object
      */
-    $.Foundation.boxWidget = {
-        selectors:      $.Foundation.options.boxWidgetOptions.boxWidgetSelectors,
-        icons:          $.Foundation.options.boxWidgetOptions.boxWidgetIcons,
-        animationSpeed: $.Foundation.options.animationSpeed,
-        activate: function (_box) {
-            var _this = this;
-
-            if ( ! _box) {
-                _box = document; // activate all boxes per default
-            }
-
-            //Listen for collapse event triggers
-            $(_box).on('click', _this.selectors.collapse, function (e) {
-                e.preventDefault();
-                _this.collapse($(this));
-            });
-
-            //Listen for remove event triggers
-            $(_box).on('click', _this.selectors.remove, function (e) {
-                e.preventDefault();
-                _this.remove($(this));
-            });
-        },
-        collapse: function (element) {
-            var _this = this,
-            // Find the box parent
-                box         = element.parents('.box').first(),
-            // Find the body and the footer
-                box_content = box.find('> .box-body, > .box-footer, > form  >.box-body, > form > .box-footer');
-
-            if ( ! box.hasClass('collapsed-box')) {
-                // Convert minus into plus
-                element.children(':first').removeClass(_this.icons.collapse).addClass(_this.icons.open);
-
-                // Hide the content
-                box_content.slideUp(_this.animationSpeed, function () {
-                    box.addClass('collapsed-box');
-                });
-            } else {
-                // Convert plus into minus
-                element.children(':first').removeClass(_this.icons.open).addClass(_this.icons.collapse);
-
-                // Show the content
-                box_content.slideDown(_this.animationSpeed, function () {
-                    box.removeClass('collapsed-box');
-                });
-            }
-        },
-        remove: function (element) {
-            // Find the box parent
-            var box = element.parents('.box').first();
-
-            box.slideUp(this.animationSpeed, function() {
-                $(this).remove();
-            });
-        }
-    };
+    $.Foundation.boxWidget = require('./widgets/box-widget');
 }
 
 /* ------------------
