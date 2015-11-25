@@ -100,6 +100,8 @@
         & > a {
             padding: 12px 5px 12px 15px;
             display: block;
+            .transition(all .15s ease-in-out);
+            .transition-property(background-color, border-color, color);
 
             & > .fa, & > .glyphicon, & > .ion {
                 width: 20px;
@@ -126,7 +128,7 @@
         .transition(transform .1s ease-in-out);
     }
 
-    li.active {
+    li.open {
         & > a > .fa-angle-left {
             .rotate(-90deg);
         }
@@ -150,10 +152,12 @@
 
         & > li {
             margin: 0;
+
             & > a {
                 padding: 5px 5px 5px 15px;
                 display: block;
                 font-size: 14px;
+                .transition(color .15s ease-in-out);
 
                 & > .fa, & > .glyphicon, & > .ion {
                     width: 20px;

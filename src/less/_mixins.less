@@ -114,16 +114,25 @@
             background: darken(@sidebar-dark-bg, 4%);
         }
 
-        // links
+        // Links
         & > a {
             border-left: 3px solid transparent;
         }
 
-        // Hover and active states
-        &:hover, &.active {
+        // Hover and Open states
+        &:hover, &.open {
             & > a {
                 color: @sidebar-dark-hover-color;
-                background: @sidebar-dark-hover-bg;
+                background-color: @sidebar-dark-hover-bg;
+                border-left-color: lighten(@link-hover-border-color, 20%);
+            }
+        }
+
+        // Active state
+        &.active {
+            & > a {
+                color: @sidebar-dark-hover-color;
+                background-color: @sidebar-dark-hover-bg;
                 border-left-color: @link-hover-border-color;
             }
         }
