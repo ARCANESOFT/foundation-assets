@@ -67,7 +67,8 @@ var files = {
         dirs.bower + '/fastclick/lib/fastclick.js',
         dirs.bower + '/ionrangeslider/js/ion.rangeSlider.js',
         dirs.bower + '/datatables/js/jquery.dataTables.js',
-        dirs.bower + '/datatables-bs/js/dataTables.bootstrap.js'
+        dirs.bower + '/datatables-bs/js/dataTables.bootstrap.js',
+        dirs.src   + '/js/vendors/skycons.js'
     ],
     fonts: [
         dirs.bower + '/bootstrap/fonts/*',
