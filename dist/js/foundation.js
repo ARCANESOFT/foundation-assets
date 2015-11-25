@@ -379,60 +379,24 @@ $(function () {
     };
 });
 
-/*
- * TODO LIST CUSTOM PLUGIN
- * -----------------------
- * This plugin depends on iCheck plugin for checkbox and radio inputs
- *
- * @type plugin
- * @usage $("#todo-widget").todolist( options );
- */
+
 $(function () {
     'use strict';
 
-    $.fn.todolist = function (options) {
-        // Render options
-        var settings = $.extend({
-            //When the user checks the input
-            onCheck: function (ele) {
-                return ele;
-            },
-            //When the user unchecks the input
-            onUncheck: function (ele) {
-                return ele;
-            }
-        }, options);
+    /*
+     * TODO LIST CUSTOM PLUGIN
+     * -----------------------
+     * This plugin depends on iCheck plugin for checkbox and radio inputs
+     *
+     * @type plugin
+     * @usage $("#todo-widget").todolist( options );
+     */
+    $.fn.todolist = require('./plugins/todo-list');
 
-        return this.each(function () {
-
-            if (typeof $.fn.iCheck != 'undefined') {
-                $('input', this).on('ifChecked', function () {
-                    var ele = $(this).parents('li').first();
-                    ele.toggleClass('done');
-                    settings.onCheck.call(ele);
-                });
-
-                $('input', this).on('ifUnchecked', function () {
-                    var ele = $(this).parents('li').first();
-                    ele.toggleClass('done');
-                    settings.onUncheck.call(ele);
-                });
-            } else {
-                $('input', this).on('change', function () {
-                    var ele = $(this).parents('li').first();
-                    ele.toggleClass('done');
-                    if ($('input', ele).is(':checked')) {
-                        settings.onCheck.call(ele);
-                    } else {
-                        settings.onUncheck.call(ele);
-                    }
-                });
-            }
-        });
-    };
-});
-
-$(function () {
+    /*
+     * User menu animation
+     * -----------------------
+     */
     var userMenu     = $('.dropdown.user.user-menu'),
         userDropMenu = userMenu.find('.dropdown-menu');
 
@@ -446,7 +410,48 @@ $(function () {
     })
 });
 
-},{"./widgets/box-widget":2,"./widgets/control-sidebar":3,"./widgets/layout":4,"./widgets/push-menu":5,"./widgets/sidebar":6}],2:[function(require,module,exports){
+},{"./plugins/todo-list":2,"./widgets/box-widget":3,"./widgets/control-sidebar":4,"./widgets/layout":5,"./widgets/push-menu":6,"./widgets/sidebar":7}],2:[function(require,module,exports){
+module.exports = function (options) {
+    // Render options
+    var settings = $.extend({
+        //When the user checks the input
+        onCheck: function (ele) {
+            return ele;
+        },
+        //When the user unchecks the input
+        onUncheck: function (ele) {
+            return ele;
+        }
+    }, options);
+
+    return this.each(function () {
+        //if (typeof $.fn.iCheck != 'undefined') {
+        //    $('input', this).on('ifChecked', function () {
+        //        var ele = $(this).parents('li').first();
+        //        ele.toggleClass('done');
+        //        settings.onCheck.call(ele);
+        //    });
+        //
+        //    $('input', this).on('ifUnchecked', function () {
+        //        var ele = $(this).parents('li').first();
+        //        ele.toggleClass('done');
+        //        settings.onUncheck.call(ele);
+        //    });
+        //} else {
+        $('input', this).on('change', function () {
+            var ele = $(this).parents('li').first();
+            ele.toggleClass('done');
+            if ($('input', ele).is(':checked')) {
+                settings.onCheck.call(ele);
+            } else {
+                settings.onUncheck.call(ele);
+            }
+        });
+        //}
+    });
+};
+
+},{}],3:[function(require,module,exports){
 module.exports = {
     selectors:      $.Foundation.options.boxWidgetOptions.boxWidgetSelectors,
     icons:          $.Foundation.options.boxWidgetOptions.boxWidgetIcons,
@@ -505,7 +510,7 @@ module.exports = {
     }
 };
 
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 module.exports = {
     // instantiate the object
     activate: function () {
@@ -584,7 +589,7 @@ module.exports = {
     }
 };
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 module.exports = {
     activate: function () {
         var _this = this;
@@ -653,7 +658,7 @@ module.exports = {
     }
 };
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 module.exports = {
     activate: function (toggleBtn) {
         // Get the screen sizes
@@ -736,7 +741,7 @@ module.exports = {
     }
 };
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 module.exports = function (menu) {
     var _this          = this;
     var animationSpeed = $.Foundation.options.animationSpeed;
