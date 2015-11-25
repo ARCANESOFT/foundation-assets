@@ -22095,6 +22095,14 @@ a:focus {
 .sidebar-menu > li > a {
   padding: 12px 5px 12px 15px;
   display: block;
+  -moz-transition: all 0.15s ease-in-out;
+  -webkit-transition: all 0.15s ease-in-out;
+  -o-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+  -webkit-transition-property: background-color, border-color, color;
+  -moz-transition-property: background-color, border-color, color;
+  -o-transition-property: background-color, border-color, color;
+  transition-property: background-color, border-color, color;
 }
 .sidebar-menu > li > a > .fa,
 .sidebar-menu > li > a > .glyphicon,
@@ -22124,14 +22132,14 @@ a:focus {
   -o-transition: transform 0.1s ease-in-out;
   transition: transform 0.1s ease-in-out;
 }
-.sidebar-menu li.active > a > .fa-angle-left {
+.sidebar-menu li.open > a > .fa-angle-left {
   -moz-transform: rotate(-90deg);
   -webkit-transform: rotate(-90deg);
   -ms-transform: rotate(-90deg);
   -o-transform: rotate(-90deg);
   transform: rotate(-90deg);
 }
-.sidebar-menu li.active > .treeview-menu {
+.sidebar-menu li.open > .treeview-menu {
   display: block;
 }
 .sidebar-menu .treeview-menu {
@@ -22151,6 +22159,10 @@ a:focus {
   padding: 5px 5px 5px 15px;
   display: block;
   font-size: 14px;
+  -moz-transition: color 0.15s ease-in-out;
+  -webkit-transition: color 0.15s ease-in-out;
+  -o-transition: color 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out;
 }
 .sidebar-menu .treeview-menu > li > a > .fa,
 .sidebar-menu .treeview-menu > li > a > .glyphicon,
@@ -27630,9 +27642,14 @@ fieldset[disabled] .btn-yahoo.focus {
   border-left: 3px solid transparent;
 }
 .skin-blue .sidebar-menu > li:hover > a,
+.skin-blue .sidebar-menu > li.open > a {
+  color: #FFF;
+  background-color: #1e282c;
+  border-left-color: #86bad8;
+}
 .skin-blue .sidebar-menu > li.active > a {
   color: #FFF;
-  background: #1e282c;
+  background-color: #1e282c;
   border-left-color: #3C8DBC;
 }
 .skin-blue .sidebar-menu > li > .treeview-menu {
@@ -27979,9 +27996,14 @@ fieldset[disabled] .btn-yahoo.focus {
   border-left: 3px solid transparent;
 }
 .skin-black .sidebar-menu > li:hover > a,
+.skin-black .sidebar-menu > li.open > a {
+  color: #FFF;
+  background-color: #1e282c;
+  border-left-color: #ffffff;
+}
 .skin-black .sidebar-menu > li.active > a {
   color: #FFF;
-  background: #1e282c;
+  background-color: #1e282c;
   border-left-color: #fff;
 }
 .skin-black .sidebar-menu > li > .treeview-menu {
@@ -28309,9 +28331,14 @@ fieldset[disabled] .btn-yahoo.focus {
   border-left: 3px solid transparent;
 }
 .skin-green .sidebar-menu > li:hover > a,
+.skin-green .sidebar-menu > li.open > a {
+  color: #FFF;
+  background-color: #1e282c;
+  border-left-color: #0dff90;
+}
 .skin-green .sidebar-menu > li.active > a {
   color: #FFF;
-  background: #1e282c;
+  background-color: #1e282c;
   border-left-color: #00A65A;
 }
 .skin-green .sidebar-menu > li > .treeview-menu {
@@ -28616,9 +28643,14 @@ fieldset[disabled] .btn-yahoo.focus {
   border-left: 3px solid transparent;
 }
 .skin-red .sidebar-menu > li:hover > a,
+.skin-red .sidebar-menu > li.open > a {
+  color: #FFF;
+  background-color: #1e282c;
+  border-left-color: #ec9a90;
+}
 .skin-red .sidebar-menu > li.active > a {
   color: #FFF;
-  background: #1e282c;
+  background-color: #1e282c;
   border-left-color: #DD4B39;
 }
 .skin-red .sidebar-menu > li > .treeview-menu {
@@ -28923,9 +28955,14 @@ fieldset[disabled] .btn-yahoo.focus {
   border-left: 3px solid transparent;
 }
 .skin-yellow .sidebar-menu > li:hover > a,
+.skin-yellow .sidebar-menu > li.open > a {
+  color: #FFF;
+  background-color: #1e282c;
+  border-left-color: #f8c573;
+}
 .skin-yellow .sidebar-menu > li.active > a {
   color: #FFF;
-  background: #1e282c;
+  background-color: #1e282c;
   border-left-color: #F39C12;
 }
 .skin-yellow .sidebar-menu > li > .treeview-menu {
@@ -29230,9 +29267,14 @@ fieldset[disabled] .btn-yahoo.focus {
   border-left: 3px solid transparent;
 }
 .skin-purple .sidebar-menu > li:hover > a,
+.skin-purple .sidebar-menu > li.open > a {
+  color: #FFF;
+  background-color: #1e282c;
+  border-left-color: #a19fcb;
+}
 .skin-purple .sidebar-menu > li.active > a {
   color: #FFF;
-  background: #1e282c;
+  background-color: #1e282c;
   border-left-color: #605CA8;
 }
 .skin-purple .sidebar-menu > li > .treeview-menu {
