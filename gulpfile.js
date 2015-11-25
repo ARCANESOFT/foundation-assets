@@ -11,7 +11,10 @@ var gulp       = require('gulp'),
     notify     = require('gulp-notify'),
     rename     = require('gulp-rename'),
     uglify     = require('gulp-uglify'),
-    merge      = require('merge-stream');
+    merge      = require('merge-stream'),
+    browserify = require('browserify'),
+    buffer     = require('vinyl-buffer'),
+    source     = require('vinyl-source-stream');
 
 /* --------------------------------------------------------------------------
  *  Directories & Files
@@ -110,15 +113,21 @@ gulp.task('less', function () {
 });
 
 gulp.task('js', function () {
-    return gulp.src(dirs.src + '/js/foundation.js')
+    return browserify({
+            entries: dirs.src + '/js/foundation.js',
+            debug: false
+        })
+        .bundle()
+        .pipe(source('foundation.js'))
+        .pipe(buffer())
+        .pipe(gulp.dest(dirs.dist + '/js'))
+        .pipe(uglify())
         .on('error', notify.onError({
             title:   'Error compiling Javascript.',
             message: 'Error: <%= error.message %>',
             onLast:  true,
             sound:   true
         }))
-        .pipe(gulp.dest(dirs.dist + '/js'))
-        .pipe(uglify())
         .pipe(rename({ extname: '.min.js' }))
         .pipe(gulp.dest(dirs.dist + '/js'))
         .pipe(notify({
