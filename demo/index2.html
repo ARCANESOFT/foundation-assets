@@ -320,14 +320,17 @@
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu">
                     <li class="header">MAIN NAVIGATION</li>
-                    <li class="active treeview">
+                    <li class="treeview active open">
                         <a href="#">
                             <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i
                             class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-                            <li class="active"><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a>
+                            <li>
+                                <a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a>
+                            </li>
+                            <li class="active">
+                                <a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a>
                             </li>
                         </ul>
                     </li>
@@ -1353,6 +1356,98 @@
                             <!-- /.box-footer -->
                         </div>
                         <!-- /.box -->
+
+                        <div class="box box-primary">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Daily active users</h3>
+
+                                <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                        class="fa fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i
+                                        class="fa fa-times"></i></button>
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="temperature"><b>Monday</b>, 07:30 AM
+                                            <span>F</span> <span><b>C</b></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="weather-icon">
+                                            <canvas height="84" width="84" id="partly-cloudy-day"></canvas>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <div class="weather-text">
+                                            <h4>Texas <br><i>Partly Cloudy Day</i></h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="weather-text pull-right">
+                                        <h3 class="degrees">23°</h3>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+
+                                <div class="row weather-days">
+                                    <div class="col-sm-2">
+                                        <div class="daily-weather">
+                                            <h4 class="day">Mon</h4>
+                                            <h5 class="degrees">25</h5>
+                                            <canvas id="clear-day" width="32" height="32"></canvas>
+                                            <p>15 <i>km/h</i></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="daily-weather">
+                                            <h4 class="day">Tue</h4>
+                                            <h5 class="degrees">25</h5>
+                                            <canvas height="32" width="32" id="rain"></canvas>
+                                            <p>12 <i>km/h</i></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="daily-weather">
+                                            <h4 class="day">Wed</h4>
+                                            <h5 class="degrees">27</h5>
+                                            <canvas height="32" width="32" id="snow"></canvas>
+                                            <p>14 <i>km/h</i></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="daily-weather">
+                                            <h4 class="day">Thu</h4>
+                                            <h5 class="degrees">28</h5>
+                                            <canvas height="32" width="32" id="sleet"></canvas>
+                                            <p>15 <i>km/h</i></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="daily-weather">
+                                            <h4 class="day">Fri</h4>
+                                            <h5 class="degrees">28</h5>
+                                            <canvas height="32" width="32" id="wind"></canvas>
+                                            <p>11 <i>km/h</i></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="daily-weather">
+                                            <h4 class="day">Sat</h4>
+                                            <h5 class="degrees">26</h5>
+                                            <canvas height="32" width="32" id="cloudy"></canvas>
+                                            <p>10 <i>km/h</i></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <!-- /.col -->
                 </div>

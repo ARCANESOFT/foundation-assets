@@ -30,15 +30,15 @@ $(function () {
     });
 
     todoList.todolist({
-        onCheck: function (ele) {
+        onCheck: function (elt) {
             window.console.log('The element has been checked');
 
-            return ele;
+            return elt;
         },
-        onUncheck: function (ele) {
+        onUncheck: function (elt) {
             window.console.log('The element has been unchecked');
 
-            return ele;
+            return elt;
         }
     });
 
