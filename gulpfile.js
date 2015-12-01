@@ -27,9 +27,6 @@ var dirs       = {
 };
 
 var files = {
-    less: {
-        //
-    },
     vendorJs: [
         dirs.bower + '/jquery/dist/jquery.js',
         dirs.bower + '/jquery-ui/jquery-ui.js',
@@ -68,12 +65,13 @@ var files = {
         dirs.bower + '/ionrangeslider/js/ion.rangeSlider.js',
         dirs.bower + '/datatables/js/jquery.dataTables.js',
         dirs.bower + '/datatables-bs/js/dataTables.bootstrap.js',
-        dirs.src   + '/js/vendors/skycons.js'
+        dirs.bower + '/toastr/toastr.js'
     ],
     fonts: [
         dirs.bower + '/bootstrap/fonts/*',
         dirs.bower + '/font-awesome/fonts/*',
-        dirs.bower + '/ionicons/fonts/*'
+        dirs.bower + '/ionicons/fonts/*',
+        dirs.bower + '/weather-icons/font/*'
     ]
 };
 
