@@ -1,10 +1,16 @@
-// Social Buttons for Bootstrap
-//==========================================>
+/*
+ * Social Buttons for Bootstrap
+ *
+ * Copyright 2013-2015 Panayiotis Lipiridis
+ * Licensed under the MIT License
+ *
+ * https://github.com/lipis/bootstrap-social
+ */
 
 @bs-height-base: (@line-height-computed + @padding-base-vertical * 2);
-@bs-height-lg:  (floor(@font-size-large * @line-height-base) + @padding-large-vertical * 2);
-@bs-height-sm:  (floor(@font-size-small * 1.5) + @padding-small-vertical * 2);
-@bs-height-xs:  (floor(@font-size-small * 1.2) + @padding-small-vertical + 1);
+@bs-height-lg:   (floor(@font-size-large * @line-height-base) + @padding-large-vertical * 2);
+@bs-height-sm:   (floor(@font-size-small * 1.5) + @padding-small-vertical * 2);
+@bs-height-xs:   (floor(@font-size-small * 1.2) + @padding-small-vertical + 1);
 
 .btn-social {
     position: relative;
@@ -91,82 +97,23 @@
     }
 }
 
-.btn-adn {
-    .btn-social(#d87a68);
-}
-
-.btn-bitbucket {
-    .btn-social(#205081);
-}
-
-.btn-dropbox {
-    .btn-social(#1087dd);
-}
-
-.btn-facebook {
-    .btn-social(#3b5998);
-}
-
-.btn-flickr {
-    .btn-social(#ff0084);
-}
-
-.btn-foursquare {
-    .btn-social(#f94877);
-}
-
-.btn-github {
-    .btn-social(#444444);
-}
-
-.btn-google {
-    .btn-social(#dd4b39);
-}
-
-.btn-instagram {
-    .btn-social(#3f729b);
-}
-
-.btn-linkedin {
-    .btn-social(#007bb6);
-}
-
-.btn-microsoft {
-    .btn-social(#2672ec);
-}
-
-.btn-openid {
-    .btn-social(#f7931e);
-}
-
-.btn-pinterest {
-    .btn-social(#cb2027);
-}
-
-.btn-reddit {
-    .btn-social(#eff7ff, #000);
-}
-
-.btn-soundcloud {
-    .btn-social(#ff5500);
-}
-
-.btn-tumblr {
-    .btn-social(#2c4762);
-}
-
-.btn-twitter {
-    .btn-social(#55acee);
-}
-
-.btn-vimeo {
-    .btn-social(#1ab7ea);
-}
-
-.btn-vk {
-    .btn-social(#587ea3);
-}
-
-.btn-yahoo {
-    .btn-social(#720e9e);
-}
+.btn-adn        { .btn-social(@color-social-adn); }
+.btn-bitbucket  { .btn-social(@color-social-bitbucket); }
+.btn-dropbox    { .btn-social(@color-social-dropbox); }
+.btn-facebook   { .btn-social(@color-social-facebook); }
+.btn-flickr     { .btn-social(@color-social-flickr); }
+.btn-foursquare { .btn-social(@color-social-foursquare); }
+.btn-github     { .btn-social(@color-social-github); }
+.btn-google     { .btn-social(@color-social-google); }
+.btn-instagram  { .btn-social(@color-social-instagram); }
+.btn-linkedin   { .btn-social(@color-social-linkedin); }
+.btn-microsoft  { .btn-social(@color-social-microsoft); }
+.btn-openid     { .btn-social(@color-social-openid); }
+.btn-pinterest  { .btn-social(@color-social-pinterest); }
+.btn-reddit     { .btn-social(@color-social-reddit, #000); }
+.btn-soundcloud { .btn-social(@color-social-soundcloud); }
+.btn-tumblr     { .btn-social(@color-social-tumblr); }
+.btn-twitter    { .btn-social(@color-social-twitter); }
+.btn-vimeo      { .btn-social(@color-social-vimeo); }
+.btn-vk         { .btn-social(@color-social-vk); }
+.btn-yahoo      { .btn-social(@color-social-yahoo); }
