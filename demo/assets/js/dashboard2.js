@@ -268,21 +268,4 @@ $(function () {
             spotColor: $this.data('spotcolor')
         });
     });
-
-    //-----------
-    //- WEATHER -
-    //-----------
-    var icons = new Skycons({"color": '#3C8DBC'}),
-        list  = [
-            'clear-day', 'clear-night', 'partly-cloudy-day',
-            'partly-cloudy-night', 'cloudy', 'rain', 'sleet', 'snow', 'wind',
-            'fog'
-        ],
-        i;
-
-    for (i = list.length; i--;) {
-        icons.set(list[i], list[i]);
-    }
-
-    icons.play();
 });
