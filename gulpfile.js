@@ -141,7 +141,7 @@ gulp.task('js-vendors', function() {
     var pace = gulp.src(dirs.bower + '/pace/pace.js')
         .pipe(uglify())
         .pipe(rename({ extname: '.min.js' }))
-        .pipe(gulp.dest(dirs.dist + '/js/vendors'));
+        .pipe(gulp.dest(dirs.dist + '/js/plugins'));
 
     var js =  gulp.src(files.vendorJs)
         .pipe(concat('vendors.js'))
