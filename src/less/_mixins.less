@@ -12,7 +12,7 @@
 }
 
 // Box solid color variantion creator
-.box-solid-variant(@color; @text-color: #fff) {
+.box-solid-variant(@color; @text-color: #FFF) {
     border: 1px solid @color;
 
     & > .box-header {
@@ -27,7 +27,7 @@
 }
 
 // Logo color variation
-.logo-variant(@bg-color; @color: #fff; @border-bottom-color: transparent; @border-bottom-width: 0) {
+.logo-variant(@bg-color; @color: #FFF; @border-bottom-color: transparent; @border-bottom-width: 0) {
     background-color: @bg-color;
     color: @color;
     border-bottom: @border-bottom-width solid @border-bottom-color;
@@ -75,7 +75,7 @@
 }
 
 // Direct Chat Variant
-.direct-chat-variant(@bg-color; @color: #fff) {
+.direct-chat-variant(@bg-color; @color: #FFF) {
     .right > .direct-chat-text {
         background: @bg-color;
         border-color: @bg-color;
@@ -87,7 +87,7 @@
     }
 }
 
-.btn-social(@color-bg, @color: #fff) {
+.btn-social(@color-bg, @color: #FFF) {
     background-color: @color-bg;
     .button-variant(@color, @color-bg, rgba(0, 0, 0, .2));
 }
@@ -102,7 +102,7 @@
     // User Panel (resides in the sidebar)
     .user-panel {
         & > .info {
-            &, & > a { color: #fff; }
+            &, & > a { color: #FFF; }
         }
     }
 
@@ -115,9 +115,7 @@
         }
 
         // Links
-        & > a {
-            border-left: 3px solid transparent;
-        }
+        & > a { border-left: 3px solid transparent; }
 
         // Hover and Open states
         &:hover, &.open {
@@ -154,11 +152,10 @@
     // All submenus
     .treeview-menu {
         & > li {
-            & > a {
-                color: @sidebar-dark-submenu-color;
-            }
+            & > a { color: @sidebar-dark-submenu-color; }
 
-            &.active > a, & > a:hover {
+            & > a:hover,
+            &.active > a {
                 color: @sidebar-dark-submenu-hover-color;
             }
         }
@@ -180,23 +177,21 @@
 
         input[type="text"] {
             color: #666;
-            .border-radius(2px, 0, 2px, 0);
+            .border-radius(2px 0 0 2px);
+            border-right: none;
 
             &:focus {
                 &, & + .input-group-btn .btn {
-                    background-color: #fff;
+                    background-color: #FFF;
                     color: #666;
-                }
-
-                & + .input-group-btn .btn {
-                    border-left-color: #fff;
                 }
             }
         }
 
         .btn {
             color: #999;
-            .border-radius(0, 2px, 0, 2px);
+            .border-radius(0 2px 2px 0);
+            border-left: none;
         }
     }
 }
@@ -293,7 +288,7 @@
 
         input[type="text"], .btn {
             height: 35px;
-            background-color: #fff; // darken(@sidebar-light-bg, 3%);
+            background-color: #FFF; // darken(@sidebar-light-bg, 3%);
             border: 1px solid transparent;
             .box-shadow(none);
             .transition(all @transition-speed @transition-fn);
@@ -305,12 +300,12 @@
 
             &:focus {
                 &, & + .input-group-btn .btn {
-                    background-color: #fff;
+                    background-color: #FFF;
                     color: #666;
                 }
 
                 & + .input-group-btn .btn {
-                    border-left-color: #fff;
+                    border-left-color: #FFF;
                 }
             }
         }
