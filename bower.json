@@ -23,7 +23,6 @@
         "tests"
     ],
     "devDependencies": {
-        "admin-lte":                 "~2.3",
         "animate.less":              "*",
         "bootstrap":                 "~3.3",
         "bootstrap-colorpicker":     "mjolnic-bootstrap-colorpicker#~2.3",
