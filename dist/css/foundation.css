@@ -26160,6 +26160,18 @@ textarea.form-control {
 .btn-danger.hover {
   background-color: #d73925;
 }
+.btn-inverse {
+  background-color: #454545;
+  border-color: #383838;
+  color: #FFF;
+}
+.btn-inverse:hover,
+.btn-inverse:active,
+.btn-inverse.hover,
+.btn-inverse:focus {
+  background-color: #383838;
+  color: #FFF;
+}
 .btn-outline {
   border: 1px solid #fff;
   background: transparent;
