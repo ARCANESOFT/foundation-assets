@@ -2,12 +2,13 @@
 //==========================================>
 
 .bg,
-.bg-red,
-.bg-yellow,
-.bg-aqua,
 .bg-blue,
-.bg-light-blue,
-.bg-green,
+.bg-light-blue, .bg-primary,
+.bg-green, .bg-success,
+.bg-aqua, .bg-info,
+.bg-inverse,
+.bg-yellow, .bg-warning,
+.bg-red, .bg-danger,
 .bg-navy,
 .bg-teal,
 .bg-olive,
@@ -43,11 +44,6 @@
 .bg-gray-light { background-color: #f7f7f7; }
 .bg-black      { background-color: @black !important; }
 .bg-blue       { background-color: @blue !important; }
-.bg-light-blue { background-color: @brand-primary !important; }
-.bg-green      { background-color: @brand-success !important; }
-.bg-aqua       { background-color: @brand-info !important; }
-.bg-yellow     { background-color: @brand-warning !important; }
-.bg-red        { background-color: @brand-danger !important; }
 .bg-navy       { background-color: @navy !important; }
 .bg-teal       { background-color: @teal !important; }
 .bg-olive      { background-color: @olive !important; }
@@ -57,10 +53,25 @@
 .bg-purple     { background-color: @purple !important; }
 .bg-maroon     { background-color: @maroon !important; }
 
+.bg-light-blue,
+.bg-primary    { background-color: @brand-primary !important; }
+
+.bg-green,
+.bg-success    { background-color: @brand-success !important; }
+
+.bg-aqua,
+.bg-info       { background-color: @brand-info !important; }
+
+.bg-inverse    { background-color: @brand-inverse !important; }
+
+.bg-yellow,
+.bg-warning    { background-color: @brand-warning !important; }
+
+.bg-red,
+.bg-danger     { background-color: @brand-danger !important; }
+
 // Set of Active Background Colors
-.bg-gray-active {
-    color: #000;
-}
+.bg-gray-active { color: #000; }
 
 .bg-gray-active       { background-color: darken(@light-gray, 10%) !important; }
 .bg-black-active      { background-color: darken(@black, 10%) !important; }
