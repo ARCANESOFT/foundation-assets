@@ -1,4 +1,395 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+module.exports = function (options) {
+    // Render options
+    var settings = $.extend({
+        //When the user checks the input
+        onCheck: function (ele) {
+            return ele;
+        },
+        //When the user unchecks the input
+        onUncheck: function (ele) {
+            return ele;
+        }
+    }, options);
+
+    return this.each(function () {
+        //if (typeof $.fn.iCheck != 'undefined') {
+        //    $('input', this).on('ifChecked', function () {
+        //        var ele = $(this).parents('li').first();
+        //        ele.toggleClass('done');
+        //        settings.onCheck.call(ele);
+        //    });
+        //
+        //    $('input', this).on('ifUnchecked', function () {
+        //        var ele = $(this).parents('li').first();
+        //        ele.toggleClass('done');
+        //        settings.onUncheck.call(ele);
+        //    });
+        //} else {
+        $('input', this).on('change', function () {
+            var ele = $(this).parents('li').first();
+            ele.toggleClass('done');
+            if ($('input', ele).is(':checked')) {
+                settings.onCheck.call(ele);
+            } else {
+                settings.onUncheck.call(ele);
+            }
+        });
+        //}
+    });
+};
+
+},{}],2:[function(require,module,exports){
+module.exports = {
+    selectors:      $.Foundation.options.boxWidgetOptions.boxWidgetSelectors,
+    icons:          $.Foundation.options.boxWidgetOptions.boxWidgetIcons,
+    animationSpeed: $.Foundation.options.animationSpeed,
+    activate: function (_box) {
+        var _this = this;
+
+        if ( ! _box) {
+            _box = document; // activate all boxes per default
+        }
+
+        //Listen for collapse event triggers
+        $(_box).on('click', _this.selectors.collapse, function (e) {
+            e.preventDefault();
+            _this.collapse($(this));
+        });
+
+        //Listen for remove event triggers
+        $(_box).on('click', _this.selectors.remove, function (e) {
+            e.preventDefault();
+            _this.remove($(this));
+        });
+    },
+    collapse: function (element) {
+        var _this = this,
+        // Find the box parent
+            box         = element.parents('.box').first(),
+        // Find the body and the footer
+            box_content = box.find('> .box-body, > .box-footer, > form  >.box-body, > form > .box-footer');
+
+        if ( ! box.hasClass('collapsed-box')) {
+            // Convert minus into plus
+            element.children(':first').removeClass(_this.icons.collapse).addClass(_this.icons.open);
+
+            // Hide the content
+            box_content.slideUp(_this.animationSpeed, function () {
+                box.addClass('collapsed-box');
+            });
+        } else {
+            // Convert plus into minus
+            element.children(':first').removeClass(_this.icons.open).addClass(_this.icons.collapse);
+
+            // Show the content
+            box_content.slideDown(_this.animationSpeed, function () {
+                box.removeClass('collapsed-box');
+            });
+        }
+    },
+    remove: function (element) {
+        // Find the box parent
+        var box = element.parents('.box').first();
+
+        box.slideUp(this.animationSpeed, function() {
+            $(this).remove();
+        });
+    }
+};
+
+},{}],3:[function(require,module,exports){
+module.exports = {
+    // instantiate the object
+    activate: function () {
+        var _this   = this,                                     // Get the object
+            options = $.Foundation.options.controlSidebarOptions, // Update options
+            sidebar = $(options.selector),                      // Get the sidebar
+            btn     = $(options.toggleBtnSelector);             // The toggle button
+
+        // Listen to the click event
+        btn.on('click', function (e) {
+            e.preventDefault();
+            // If the sidebar is not open
+            if (
+                ! sidebar.hasClass('control-sidebar-open') &&
+                ! $('body').hasClass('control-sidebar-open')
+            ) {
+                // Open the sidebar
+                _this.open(sidebar, options.slide);
+            } else {
+                _this.close(sidebar, options.slide);
+            }
+        });
+
+        // If the body has a boxed layout, fix the sidebar bg position
+        var bg = $('.control-sidebar-bg');
+
+        _this._fix(bg);
+
+        // If the body has a fixed layout, make the control sidebar fixed
+        if ($('body').hasClass('fixed')) {
+            _this._fixForFixed(sidebar);
+        } else {
+            // If the content height is less than the sidebar's height, force max height
+            if ($('.content-wrapper, .right-side').height() < sidebar.height()) {
+                _this._fixForContent(sidebar);
+            }
+        }
+    },
+    // Open the control sidebar
+    open: function (sidebar, slide) {
+        var control = (slide) ? sidebar : $('body');
+
+        control.addClass('control-sidebar-open');
+    },
+    // Close the control sidebar
+    close: function (sidebar, slide) {
+        var control = (slide) ? sidebar : $('body');
+
+        control.removeClass('control-sidebar-open');
+    },
+    _fix: function (sidebar) {
+        var _this = this;
+
+        if ($('body').hasClass('layout-boxed')) {
+            sidebar.css('position', 'absolute').height($('.wrapper').height());
+            $(window).resize(function () {
+                _this._fix(sidebar);
+            });
+        } else {
+            sidebar.css({
+                'position': 'fixed',
+                'height': 'auto'
+            });
+        }
+    },
+    _fixForFixed: function (sidebar) {
+        sidebar.css({
+            'position':       'fixed',
+            'max-height':     '100%',
+            'overflow':       'auto',
+            'padding-bottom': '50px'
+        });
+    },
+    _fixForContent: function (sidebar) {
+        $('.content-wrapper, .right-side').css('min-height', sidebar.height());
+    }
+};
+
+},{}],4:[function(require,module,exports){
+module.exports = {
+    activate: function () {
+        var _this = this;
+
+        _this.fix();
+        _this.fixSidebar();
+        $(window, '.wrapper').resize(function () {
+            _this.fix();
+            _this.fixSidebar();
+        });
+    },
+    fix: function () {
+        // Get window height and the wrapper height
+        var neg            = $('.main-header').outerHeight() + $('.main-footer').outerHeight(),
+            window_height  = $(window).height(),
+            sidebar_height = $('.sidebar').height(),
+            postSetWidth;
+
+        // Set the min-height of the content and sidebar based on the the height of the document.
+        if ($('body').hasClass('fixed')) {
+            postSetWidth = window_height - $('.main-footer').outerHeight();
+        } else {
+            postSetWidth = window_height >= sidebar_height ? (window_height - neg) : sidebar_height;
+
+            // Fix for the control sidebar height
+            var controlSidebar = $($.Foundation.options.controlSidebarOptions.selector);
+
+            if (
+                typeof controlSidebar !== 'undefined' &&
+                controlSidebar.height() > postSetWidth
+            ) {
+                postSetWidth = controlSidebar.height();
+            }
+        }
+
+        $('.content-wrapper, .right-side').css('min-height', postSetWidth);
+    },
+    fixSidebar: function () {
+        var sidebar = $('.sidebar');
+
+        // Make sure the body tag has the .fixed class
+        if ( ! $('body').hasClass('fixed')) {
+            if (typeof $.fn.slimScroll != 'undefined') {
+                sidebar.slimScroll({destroy: true}).height('auto');
+            }
+
+            return;
+        } else if (typeof $.fn.slimScroll == 'undefined' && window.console) {
+            window.console.error('Error: the fixed layout requires the slimscroll plugin!');
+        }
+
+        // Enable slimscroll for fixed layout
+        if ($.Foundation.options.sidebarSlimScroll) {
+            if (typeof $.fn.slimScroll != 'undefined') {
+                // Destroy if it exists
+                sidebar.slimScroll({destroy: true}).height('auto');
+
+                // Add slimscroll
+                sidebar.slimscroll({
+                    height: ($(window).height() - $('.main-header').height()) + 'px',
+                    color:  'rgba(0,0,0,0.2)',
+                    size:   '3px'
+                });
+            }
+        }
+    }
+};
+
+},{}],5:[function(require,module,exports){
+module.exports = {
+    activate: function (toggleBtn) {
+        // Get the screen sizes
+        var body        = $('body'),
+            screenSizes = $.Foundation.options.screenSizes;
+
+        //Enable sidebar toggle
+        $(document).on('click', toggleBtn, function (e) {
+            e.preventDefault();
+
+            // Enable sidebar push menu
+            if ($(window).width() > (screenSizes.sm - 1)) {
+                if (body.hasClass('sidebar-collapse')) {
+                    body.removeClass('sidebar-collapse').trigger('expanded.pushMenu');
+                } else {
+                    body.addClass('sidebar-collapse').trigger('collapsed.pushMenu');
+                }
+            }
+            // Handle sidebar push menu for small screens
+            else {
+                if (body.hasClass('sidebar-open')) {
+                    body.removeClass('sidebar-open').removeClass('sidebar-collapse').trigger('collapsed.pushMenu');
+                } else {
+                    body.addClass('sidebar-open').trigger('expanded.pushMenu');
+                }
+            }
+        });
+
+        $('.content-wrapper').click(function () {
+            // Enable hide menu when clicking on the content-wrapper on small screens
+            if (
+                $(window).width() <= (screenSizes.sm - 1) &&
+                body.hasClass('sidebar-open')
+            ) {
+                body.removeClass('sidebar-open');
+            }
+        });
+
+        // Enable expand on hover for sidebar mini
+        if (
+            $.Foundation.options.sidebarExpandOnHover ||
+            (body.hasClass('fixed') && body.hasClass('sidebar-mini'))
+        ) {
+            this.expandOnHover();
+        }
+    },
+    expandOnHover: function () {
+        var _this       = this,
+            body        = $('body'),
+            screenWidth = $.Foundation.options.screenSizes.sm - 1;
+
+        // Expand sidebar on hover
+        $('.main-sidebar').hover(function () {
+            if (
+                body.hasClass('sidebar-mini') &&
+                body.hasClass('sidebar-collapse') &&
+                $(window).width() > screenWidth
+            ) {
+                _this.expand();
+            }
+        }, function () {
+            if (
+                body.hasClass('sidebar-mini') &&
+                body.hasClass('sidebar-expanded-on-hover') &&
+                $(window).width() > screenWidth
+            ) {
+                _this.collapse();
+            }
+        });
+    },
+    expand: function () {
+        $('body').removeClass('sidebar-collapse').addClass('sidebar-expanded-on-hover');
+    },
+    collapse: function () {
+        var body = $('body');
+
+        if (body.hasClass('sidebar-expanded-on-hover')) {
+            body.removeClass('sidebar-expanded-on-hover').addClass('sidebar-collapse');
+        }
+    }
+};
+
+},{}],6:[function(require,module,exports){
+module.exports = function (menu) {
+    var _this          = this;
+    var animationSpeed = $.Foundation.options.animationSpeed;
+
+    $(menu).on('click', 'li a', function (e) {
+        // Get the clicked link and the next element
+        var $this        = $(this);
+        var checkElement = $this.next();
+
+        // Check if the next element is a menu and is visible
+        if (
+            (checkElement.is('.treeview-menu')) &&
+            (checkElement.is(':visible')) &&
+            ( ! $('body').hasClass('sidebar-collapse'))
+        ) {
+            // Close the menu
+            checkElement.slideUp(animationSpeed, function () {
+                checkElement.removeClass('menu-open');
+                // Fix the layout in case the sidebar stretches over the height of the window
+                // _this.layout.fix();
+            });
+
+            checkElement.parent('li').removeClass('open');
+        }
+        // If the menu is not visible
+        else if (
+            (checkElement.is('.treeview-menu')) &&
+            ( ! checkElement.is(':visible'))
+        ) {
+            // Get the parent menu
+            var parent = $this.parents('ul').first();
+            // Close all open menus within the parent
+            var ul = parent.find('ul:visible').slideUp(animationSpeed);
+            // Remove the menu-open class from the parent
+
+            ul.removeClass('menu-open');
+
+            // Get the parent li
+            var parent_li = $this.parent('li');
+
+            // Open the target menu and add the menu-open class
+            checkElement.slideDown(animationSpeed, function () {
+                // Add the class active to the parent li
+                checkElement.addClass('menu-open');
+                parent.find('li.open').removeClass('open');
+                parent_li.addClass('open');
+
+                // Fix the layout in case the sidebar stretches over the height of the window
+                _this.layout.fix();
+            });
+        }
+
+        // if this isn't a link, prevent the page from being redirected
+        if (checkElement.is('.treeview-menu')) {
+            e.preventDefault();
+        }
+    });
+};
+
+},{}],7:[function(require,module,exports){
 /*! Foundation app.js
  * ================
  * Main JS application file for Foundation v2. This file
@@ -410,395 +801,4 @@ $(function () {
     })
 });
 
-},{"./plugins/todo-list":2,"./widgets/box-widget":3,"./widgets/control-sidebar":4,"./widgets/layout":5,"./widgets/push-menu":6,"./widgets/sidebar":7}],2:[function(require,module,exports){
-module.exports = function (options) {
-    // Render options
-    var settings = $.extend({
-        //When the user checks the input
-        onCheck: function (ele) {
-            return ele;
-        },
-        //When the user unchecks the input
-        onUncheck: function (ele) {
-            return ele;
-        }
-    }, options);
-
-    return this.each(function () {
-        //if (typeof $.fn.iCheck != 'undefined') {
-        //    $('input', this).on('ifChecked', function () {
-        //        var ele = $(this).parents('li').first();
-        //        ele.toggleClass('done');
-        //        settings.onCheck.call(ele);
-        //    });
-        //
-        //    $('input', this).on('ifUnchecked', function () {
-        //        var ele = $(this).parents('li').first();
-        //        ele.toggleClass('done');
-        //        settings.onUncheck.call(ele);
-        //    });
-        //} else {
-        $('input', this).on('change', function () {
-            var ele = $(this).parents('li').first();
-            ele.toggleClass('done');
-            if ($('input', ele).is(':checked')) {
-                settings.onCheck.call(ele);
-            } else {
-                settings.onUncheck.call(ele);
-            }
-        });
-        //}
-    });
-};
-
-},{}],3:[function(require,module,exports){
-module.exports = {
-    selectors:      $.Foundation.options.boxWidgetOptions.boxWidgetSelectors,
-    icons:          $.Foundation.options.boxWidgetOptions.boxWidgetIcons,
-    animationSpeed: $.Foundation.options.animationSpeed,
-    activate: function (_box) {
-        var _this = this;
-
-        if ( ! _box) {
-            _box = document; // activate all boxes per default
-        }
-
-        //Listen for collapse event triggers
-        $(_box).on('click', _this.selectors.collapse, function (e) {
-            e.preventDefault();
-            _this.collapse($(this));
-        });
-
-        //Listen for remove event triggers
-        $(_box).on('click', _this.selectors.remove, function (e) {
-            e.preventDefault();
-            _this.remove($(this));
-        });
-    },
-    collapse: function (element) {
-        var _this = this,
-        // Find the box parent
-            box         = element.parents('.box').first(),
-        // Find the body and the footer
-            box_content = box.find('> .box-body, > .box-footer, > form  >.box-body, > form > .box-footer');
-
-        if ( ! box.hasClass('collapsed-box')) {
-            // Convert minus into plus
-            element.children(':first').removeClass(_this.icons.collapse).addClass(_this.icons.open);
-
-            // Hide the content
-            box_content.slideUp(_this.animationSpeed, function () {
-                box.addClass('collapsed-box');
-            });
-        } else {
-            // Convert plus into minus
-            element.children(':first').removeClass(_this.icons.open).addClass(_this.icons.collapse);
-
-            // Show the content
-            box_content.slideDown(_this.animationSpeed, function () {
-                box.removeClass('collapsed-box');
-            });
-        }
-    },
-    remove: function (element) {
-        // Find the box parent
-        var box = element.parents('.box').first();
-
-        box.slideUp(this.animationSpeed, function() {
-            $(this).remove();
-        });
-    }
-};
-
-},{}],4:[function(require,module,exports){
-module.exports = {
-    // instantiate the object
-    activate: function () {
-        var _this   = this,                                     // Get the object
-            options = $.Foundation.options.controlSidebarOptions, // Update options
-            sidebar = $(options.selector),                      // Get the sidebar
-            btn     = $(options.toggleBtnSelector);             // The toggle button
-
-        // Listen to the click event
-        btn.on('click', function (e) {
-            e.preventDefault();
-            // If the sidebar is not open
-            if (
-                ! sidebar.hasClass('control-sidebar-open') &&
-                ! $('body').hasClass('control-sidebar-open')
-            ) {
-                // Open the sidebar
-                _this.open(sidebar, options.slide);
-            } else {
-                _this.close(sidebar, options.slide);
-            }
-        });
-
-        // If the body has a boxed layout, fix the sidebar bg position
-        var bg = $('.control-sidebar-bg');
-
-        _this._fix(bg);
-
-        // If the body has a fixed layout, make the control sidebar fixed
-        if ($('body').hasClass('fixed')) {
-            _this._fixForFixed(sidebar);
-        } else {
-            // If the content height is less than the sidebar's height, force max height
-            if ($('.content-wrapper, .right-side').height() < sidebar.height()) {
-                _this._fixForContent(sidebar);
-            }
-        }
-    },
-    // Open the control sidebar
-    open: function (sidebar, slide) {
-        var control = (slide) ? sidebar : $('body');
-
-        control.addClass('control-sidebar-open');
-    },
-    // Close the control sidebar
-    close: function (sidebar, slide) {
-        var control = (slide) ? sidebar : $('body');
-
-        control.removeClass('control-sidebar-open');
-    },
-    _fix: function (sidebar) {
-        var _this = this;
-
-        if ($('body').hasClass('layout-boxed')) {
-            sidebar.css('position', 'absolute').height($('.wrapper').height());
-            $(window).resize(function () {
-                _this._fix(sidebar);
-            });
-        } else {
-            sidebar.css({
-                'position': 'fixed',
-                'height': 'auto'
-            });
-        }
-    },
-    _fixForFixed: function (sidebar) {
-        sidebar.css({
-            'position':       'fixed',
-            'max-height':     '100%',
-            'overflow':       'auto',
-            'padding-bottom': '50px'
-        });
-    },
-    _fixForContent: function (sidebar) {
-        $('.content-wrapper, .right-side').css('min-height', sidebar.height());
-    }
-};
-
-},{}],5:[function(require,module,exports){
-module.exports = {
-    activate: function () {
-        var _this = this;
-
-        _this.fix();
-        _this.fixSidebar();
-        $(window, '.wrapper').resize(function () {
-            _this.fix();
-            _this.fixSidebar();
-        });
-    },
-    fix: function () {
-        // Get window height and the wrapper height
-        var neg            = $('.main-header').outerHeight() + $('.main-footer').outerHeight(),
-            window_height  = $(window).height(),
-            sidebar_height = $('.sidebar').height(),
-            postSetWidth;
-
-        // Set the min-height of the content and sidebar based on the the height of the document.
-        if ($('body').hasClass('fixed')) {
-            postSetWidth = window_height - $('.main-footer').outerHeight();
-        } else {
-            postSetWidth = window_height >= sidebar_height ? (window_height - neg) : sidebar_height;
-
-            // Fix for the control sidebar height
-            var controlSidebar = $($.Foundation.options.controlSidebarOptions.selector);
-
-            if (
-                typeof controlSidebar !== 'undefined' &&
-                controlSidebar.height() > postSetWidth
-            ) {
-                postSetWidth = controlSidebar.height();
-            }
-        }
-
-        $('.content-wrapper, .right-side').css('min-height', postSetWidth);
-    },
-    fixSidebar: function () {
-        var sidebar = $('.sidebar');
-
-        // Make sure the body tag has the .fixed class
-        if ( ! $('body').hasClass('fixed')) {
-            if (typeof $.fn.slimScroll != 'undefined') {
-                sidebar.slimScroll({destroy: true}).height('auto');
-            }
-
-            return;
-        } else if (typeof $.fn.slimScroll == 'undefined' && window.console) {
-            window.console.error('Error: the fixed layout requires the slimscroll plugin!');
-        }
-
-        // Enable slimscroll for fixed layout
-        if ($.Foundation.options.sidebarSlimScroll) {
-            if (typeof $.fn.slimScroll != 'undefined') {
-                // Destroy if it exists
-                sidebar.slimScroll({destroy: true}).height('auto');
-
-                // Add slimscroll
-                sidebar.slimscroll({
-                    height: ($(window).height() - $('.main-header').height()) + 'px',
-                    color:  'rgba(0,0,0,0.2)',
-                    size:   '3px'
-                });
-            }
-        }
-    }
-};
-
-},{}],6:[function(require,module,exports){
-module.exports = {
-    activate: function (toggleBtn) {
-        // Get the screen sizes
-        var body        = $('body'),
-            screenSizes = $.Foundation.options.screenSizes;
-
-        //Enable sidebar toggle
-        $(document).on('click', toggleBtn, function (e) {
-            e.preventDefault();
-
-            // Enable sidebar push menu
-            if ($(window).width() > (screenSizes.sm - 1)) {
-                if (body.hasClass('sidebar-collapse')) {
-                    body.removeClass('sidebar-collapse').trigger('expanded.pushMenu');
-                } else {
-                    body.addClass('sidebar-collapse').trigger('collapsed.pushMenu');
-                }
-            }
-            // Handle sidebar push menu for small screens
-            else {
-                if (body.hasClass('sidebar-open')) {
-                    body.removeClass('sidebar-open').removeClass('sidebar-collapse').trigger('collapsed.pushMenu');
-                } else {
-                    body.addClass('sidebar-open').trigger('expanded.pushMenu');
-                }
-            }
-        });
-
-        $('.content-wrapper').click(function () {
-            // Enable hide menu when clicking on the content-wrapper on small screens
-            if (
-                $(window).width() <= (screenSizes.sm - 1) &&
-                body.hasClass('sidebar-open')
-            ) {
-                body.removeClass('sidebar-open');
-            }
-        });
-
-        // Enable expand on hover for sidebar mini
-        if (
-            $.Foundation.options.sidebarExpandOnHover ||
-            (body.hasClass('fixed') && body.hasClass('sidebar-mini'))
-        ) {
-            this.expandOnHover();
-        }
-    },
-    expandOnHover: function () {
-        var _this       = this,
-            body        = $('body'),
-            screenWidth = $.Foundation.options.screenSizes.sm - 1;
-
-        // Expand sidebar on hover
-        $('.main-sidebar').hover(function () {
-            if (
-                body.hasClass('sidebar-mini') &&
-                body.hasClass('sidebar-collapse') &&
-                $(window).width() > screenWidth
-            ) {
-                _this.expand();
-            }
-        }, function () {
-            if (
-                body.hasClass('sidebar-mini') &&
-                body.hasClass('sidebar-expanded-on-hover') &&
-                $(window).width() > screenWidth
-            ) {
-                _this.collapse();
-            }
-        });
-    },
-    expand: function () {
-        $('body').removeClass('sidebar-collapse').addClass('sidebar-expanded-on-hover');
-    },
-    collapse: function () {
-        var body = $('body');
-
-        if (body.hasClass('sidebar-expanded-on-hover')) {
-            body.removeClass('sidebar-expanded-on-hover').addClass('sidebar-collapse');
-        }
-    }
-};
-
-},{}],7:[function(require,module,exports){
-module.exports = function (menu) {
-    var _this          = this;
-    var animationSpeed = $.Foundation.options.animationSpeed;
-
-    $(menu).on('click', 'li a', function (e) {
-        // Get the clicked link and the next element
-        var $this        = $(this);
-        var checkElement = $this.next();
-
-        // Check if the next element is a menu and is visible
-        if (
-            (checkElement.is('.treeview-menu')) &&
-            (checkElement.is(':visible')) &&
-            ( ! $('body').hasClass('sidebar-collapse'))
-        ) {
-            // Close the menu
-            checkElement.slideUp(animationSpeed, function () {
-                checkElement.removeClass('menu-open');
-                // Fix the layout in case the sidebar stretches over the height of the window
-                // _this.layout.fix();
-            });
-
-            checkElement.parent('li').removeClass('open');
-        }
-        // If the menu is not visible
-        else if (
-            (checkElement.is('.treeview-menu')) &&
-            ( ! checkElement.is(':visible'))
-        ) {
-            // Get the parent menu
-            var parent = $this.parents('ul').first();
-            // Close all open menus within the parent
-            var ul = parent.find('ul:visible').slideUp(animationSpeed);
-            // Remove the menu-open class from the parent
-
-            ul.removeClass('menu-open');
-
-            // Get the parent li
-            var parent_li = $this.parent('li');
-
-            // Open the target menu and add the menu-open class
-            checkElement.slideDown(animationSpeed, function () {
-                // Add the class active to the parent li
-                checkElement.addClass('menu-open');
-                parent.find('li.open').removeClass('open');
-                parent_li.addClass('open');
-
-                // Fix the layout in case the sidebar stretches over the height of the window
-                _this.layout.fix();
-            });
-        }
-
-        // if this isn't a link, prevent the page from being redirected
-        if (checkElement.is('.treeview-menu')) {
-            e.preventDefault();
-        }
-    });
-};
-
-},{}]},{},[1]);
+},{"./plugins/todo-list":1,"./widgets/box-widget":2,"./widgets/control-sidebar":3,"./widgets/layout":4,"./widgets/push-menu":5,"./widgets/sidebar":6}]},{},[7]);
