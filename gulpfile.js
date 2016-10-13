@@ -32,6 +32,7 @@ var files = {
         dirs.bower + '/jquery-ui/jquery-ui.js',
         dirs.src   + '/js/vendors/jquery-ui-fix.js',
         dirs.bower + '/bootstrap/dist/js/bootstrap.js',
+        dirs.bower + '/fuelux/dist/js/fuelux.js',
         dirs.bower + '/vue/dist/vue.js',
         dirs.bower + '/jquery-flot/jquery.flot.js',
         dirs.bower + '/jquery-flot/jquery.flot.resize.js',
@@ -40,8 +41,7 @@ var files = {
         dirs.bower + '/jquery-flot/jquery.flot.categories.js',
         dirs.bower + '/raphael/raphael.js',
         dirs.bower + '/morris.js/morris.js',
-        dirs.bower + '/chart-js/Chart.js',
-        dirs.bower + '/icheck/icheck.js',
+        dirs.bower + '/chart.js/dist/Chart.js',
         dirs.bower + '/sweetalert/dist/sweetalert-dev.js',
         dirs.src   + '/js/vendors/jquery.sparkline.js',
         dirs.src   + '/js/vendors/jquery-jvectormap.js',
@@ -50,28 +50,30 @@ var files = {
         dirs.bower + '/jquery-inputmask/dist/jquery.inputmask.bundle.js',
         dirs.bower + '/moment/moment.js',
         dirs.bower + '/fullcalendar/dist/fullcalendar.js',
-        dirs.bower + '/fullcalendar/dist/lang-all.js',
+        dirs.bower + '/fullcalendar/dist/locale-all.js',
         dirs.bower + '/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js',
         dirs.bower + '/bootstrap-daterangepicker/daterangepicker.js',
-        dirs.bower + '/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
-        dirs.bower + '/bootstrap-slider/js/bootstrap-slider.js',
-        dirs.bower + '/bootstrap-timepicker/js/bootstrap-timepicker.js',
-        dirs.bower + '/bootstrap-wysihtml/dist/bootstrap3-wysihtml5.all.js',
-        dirs.src   + '/js/vendors/bootstrap-datepicker-fix.js',
-        dirs.src   + '/js/vendors/bootstrap3-wysihtml5.all.js',
+        dirs.bower + '/bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js',
+        dirs.bower + '/bootstrap-slider/dist/bootstrap-slider.js',
         dirs.bower + '/select2/dist/js/select2.full.js',
         dirs.bower + '/slimScroll/jquery.slimscroll.js',
         dirs.bower + '/fastclick/lib/fastclick.js',
         dirs.bower + '/ionrangeslider/js/ion.rangeSlider.js',
         dirs.bower + '/datatables/js/jquery.dataTables.js',
         dirs.bower + '/datatables-bs/js/dataTables.bootstrap.js',
+        dirs.bower + '/trumbowyg/dist/trumbowyg.js',
+        dirs.bower + '/trumbowyg/dist/langs/ar.js',
+        dirs.bower + '/trumbowyg/dist/langs/fr.js',
+        dirs.src   + '/js/vendors/trumbowyg-config.js',
         dirs.bower + '/toastr/toastr.js'
     ],
     fonts: [
         dirs.bower + '/bootstrap/fonts/*',
         dirs.bower + '/font-awesome/fonts/*',
         dirs.bower + '/ionicons/fonts/*',
-        dirs.bower + '/weather-icons/font/*'
+        dirs.bower + '/fuelux/dist/fonts/*',
+        dirs.bower + '/weather-icons/font/*',
+        dirs.src   + '/fonts/*'
     ]
 };
 
@@ -80,12 +82,12 @@ var files = {
  * --------------------------------------------------------------------------
  */
 gulp.task('all',     ['vendors', 'default']);
-gulp.task('default', ['less', 'js']);
+gulp.task('default', ['less', 'scripts']);
 gulp.task('vendors', ['js-vendors', 'img-vendors', 'fonts-vendors']);
 
 gulp.task('watch', function () {
     gulp.watch(dirs.src + '/less/**/*.less', ['less']);
-    gulp.watch(dirs.src + '/js/**/*.js',     ['js']);
+    gulp.watch(dirs.src + '/js/**/*.js',     ['scripts']);
 });
 
 gulp.task('less', function () {
@@ -111,7 +113,7 @@ gulp.task('less', function () {
         }));
 });
 
-gulp.task('js', function () {
+gulp.task('scripts', function () {
     return browserify({
             entries: dirs.src + '/js/foundation.js',
             debug: false
