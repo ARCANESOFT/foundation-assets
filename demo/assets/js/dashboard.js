@@ -42,8 +42,8 @@ $(function () {
         }
     });
 
-    //bootstrap WYSIHTML5 - text editor
-    $('.textarea').wysihtml5();
+    // Trumbowyg - text editor
+    $('.textarea').trumbowyg();
 
     $('.daterange').daterangepicker({
         ranges: {
@@ -136,7 +136,10 @@ $(function () {
     });
 
     // The Calender
-    $("#calendar").datepicker();
+    $("#calendar").datetimepicker({
+        inline: true,
+        format: 'YYYY-MM-dd'
+    });
 
     // SLIMSCROLL FOR CHAT WIDGET
     $('#chat-box').slimScroll({
@@ -163,7 +166,7 @@ $(function () {
         xkey: 'y',
         ykeys: ['item1', 'item2'],
         labels: ['Item 1', 'Item 2'],
-        lineColors: ['#a0d0e0', '#3c8dbc'],
+        lineColors: ['#7986CB', '#4DB6AC'],
         hideHover: 'auto'
     });
 
@@ -185,7 +188,7 @@ $(function () {
         xkey: 'y',
         ykeys: ['item1'],
         labels: ['Item 1'],
-        lineColors: ['#efefef'],
+        lineColors: ['#00ACC1'],
         lineWidth: 2,
         hideHover: 'auto',
         gridTextColor: "#fff",
@@ -200,17 +203,18 @@ $(function () {
     // Donut Chart
     var donut = new Morris.Donut({
         element: 'sales-chart',
+        resize: true,
         data: [
             {label: "Download Sales", value: 12},
             {label: "In-Store Sales", value: 30},
             {label: "Mail-Order Sales", value: 20}
         ],
         colors: ["#3c8dbc", "#f56954", "#00a65a"],
-        resize: true
+        hideHover: 'auto'
     });
 
-    // Fix for charts under tabs
-    $('.box ul.nav a').on('shown.bs.tab', function () {
+    //Fix for charts under tabs
+    $('.nav-tabs-custom ul.nav a').on('shown.bs.tab', function () {
         area.redraw();
         donut.redraw();
         line.redraw();
